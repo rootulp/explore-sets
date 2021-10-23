@@ -2,10 +2,10 @@ import { ethers } from "ethers";
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head";
 import React from "react"
-import Home from "."
 import styles from '../styles/Home.module.css'
 import { BaseProvider } from "@ethersproject/providers";
-
+import Set from "set.js";
+import { initializeSet } from "../src/setJsApi";
 
 const network = "kovan";
 const alchemyToken = process.env.ALCHEMY_KOVAN_TOKEN;
@@ -14,15 +14,22 @@ const provider: BaseProvider = ethers.getDefaultProvider(network, {
   alchemy: alchemyToken,
 });
 
+// TODO(@rootulp): the types of providers conflict between ethers and set.js
+// Resolve the type conflict in order to remove the type assertion
+const set: Set = initializeSet(network, provider);
+
 interface HomeProps {
   blockNumber: string
+  setAddresses: string[]
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const blockNumber = await provider.getBlockNumber();
+  const setAddresses = await set.system.getSetsAsync();
   return {
     props: {
       blockNumber,
+      setAddresses,
     },
   }
 }
@@ -43,9 +50,13 @@ const Sets: NextPage<HomeProps> = (props: HomeProps) => {
         </h1>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            {props.blockNumber}
-          </a>
+          <div className={styles.card}>
+            The current block on {network} is {props.blockNumber}
+          </div>
+
+          <div className={styles.card}>
+            The current set addresses {props.setAddresses}
+          </div>
         </div>
       </main>
     </div>
