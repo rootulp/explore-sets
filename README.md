@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://rootulp.mit-license.org)
 
-A small app to explore sets. Inspired by [tokensets.com/explore](https://www.tokensets.com/explore).
+A small app to explore sets. Inspired by [tokensets.com/explore](https://www.tokensets.com/explore), [web3modal-example](https://github.com/ChangoMan/web3modal-example).
 
 Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/).
 
