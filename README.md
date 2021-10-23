@@ -17,8 +17,8 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 
 - [X] Create Next.js app
 - [X] Convert it to TypeScript
-- [ ] Set up an Alchemy project
-- [ ] Configure an Ethers provider
+- [X] Set up an Alchemy project
+- [X] Configure an Ethers provider
 - [ ] Read basic Set info from Set.js
 - [ ] Create a page for all Set cards. Possible URL path `/set`
 - [ ] Populate cards
