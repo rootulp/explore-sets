@@ -1,18 +1,21 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { ethers, providers } from 'ethers'
-import { arrayify } from "ethers/lib/utils"
 import Head from 'next/head'
 import { useCallback, useEffect, useReducer } from 'react'
 import Web3Modal from 'web3modal'
 import { ellipseAddress, getChainData } from '../lib/utilities'
 
-const INFURA_ID = '460f40a260564ac4a4f4b3fffb032dad'
+const infuraToken = process.env.INFURA_TOKEN;
+console.log("INFURA_TOKEN", infuraToken);
+
+const alchemyToken = process.env.ALCHEMY_KOVAN_TOKEN;
+console.log("alchemyToken", alchemyToken);
 
 const providerOptions = {
   walletconnect: {
-    package: WalletConnectProvider, // required
+    package: WalletConnectProvider,
     options: {
-      infuraId: INFURA_ID, // required
+      infuraId: process.env.INFURA_TOKEN,
     },
   },
 }
@@ -149,9 +152,9 @@ export const Home = (): JSX.Element => {
       }
 
       // https://docs.ethers.io/v5/concepts/best-practices/#best-practices--network-changes
-      const handleChainChanged = (hexChainId: string) => {
+      const handleChainChanged = (_hexChainId: string) => {
         window.location.reload();
-    }
+      }
 
       const handleDisconnect = (error: { code: number; message: string }) => {
         console.log('disconnect', error)

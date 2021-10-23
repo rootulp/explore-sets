@@ -9,6 +9,7 @@ import { initializeSet } from "../lib/setJsApi";
 
 const network = "kovan";
 const alchemyToken = process.env.ALCHEMY_KOVAN_TOKEN;
+console.log("alchemyToken", alchemyToken);
 
 const provider: BaseProvider = ethers.getDefaultProvider(network, {
   alchemy: alchemyToken,
