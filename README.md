@@ -4,12 +4,19 @@
 
 A small app to explore sets. Inspired by [tokensets.com/explore](https://www.tokensets.com/explore).
 
-Built with [next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/).
+Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/).
+
+## Local Development
+```bash
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## To-do
 
-- [] Create Next.js app
-- [ ] Convert it to TypeScript
+- [X] Create Next.js app
+- [X] Convert it to TypeScript
 - [ ] Set up an Alchemy project
 - [ ] Configure an Ethers provider
 - [ ] Read basic Set info from Set.js
@@ -30,3 +37,10 @@ This project is under active development. I'd appreciate any feedback via [issue
 ## License
 
 [MIT](https://rootulp.mit-license.org/) © [Rootul Patel](https://rootulp.com)
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## References
+
+- [Next.js docs](https://nextjs.org/docs)
+- [Next.js deployment docs](https://nextjs.org/docs/deployment)
