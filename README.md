@@ -7,11 +7,11 @@ A small app to explore sets. Inspired by [tokensets.com/explore](https://www.tok
 Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/).
 
 ## Local Development
-```bash
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone this repo
+1. `cp .env.default .env`
+1. Populate tokens in `.env`
+1. Start the app in dev mode with `yarn dev`
+1. Open [http://localhost:3000](http://localhost:3000)
 
 ## To-do
 
