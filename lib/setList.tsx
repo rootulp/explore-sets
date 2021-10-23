@@ -17,12 +17,10 @@ export const SetList = (props: SetListProps): JSX.Element => {
     useEffect(() => {
         setIsLoading(true)
         async function fetchSetDetails() {
-            const tokenAddresses = await set.system.getSetsAsync()
+            // Limit to the first 10 token addresses during development
+            const tokenAddresses = (await set.system.getSetsAsync()).slice(0, 10)
             const moduleAddresses =  getModuleAddresses(props.chainId)
-            console.log(`moduleAddresses: `, moduleAddresses)
-            const foo = tokenAddresses.slice(0, 2)
-            console.log(`tokenAddresses: `, foo)
-            const result = await set.setToken.batchFetchSetDetailsAsync(foo, moduleAddresses)
+            const result = await set.setToken.batchFetchSetDetailsAsync(tokenAddresses, moduleAddresses)
             setSetDetails(result)
             setIsLoading(false)
         }
@@ -40,7 +38,7 @@ export const SetList = (props: SetListProps): JSX.Element => {
     return (
         <div>
             <h3>Set List</h3>
-            {setDetails.map(setDetail => <SetCard setDetail={setDetail} />) }
+            {setDetails.map(setDetail => <SetCard name={setDetail.name} symbol={setDetail.symbol} positions={setDetail.positions} />) }
         </div>
     )
 }
