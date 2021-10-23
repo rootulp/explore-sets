@@ -1,12 +1,12 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
-import { ethers, providers } from 'ethers'
+import { providers } from 'ethers'
 import Head from 'next/head'
 import { useCallback, useEffect, useReducer } from 'react'
 import Web3Modal from 'web3modal'
 import { ellipseAddress, getChainData } from '../lib/utilities'
 
 const infuraToken = process.env.INFURA_TOKEN;
-console.log("INFURA_TOKEN", infuraToken);
+console.log("infuraToken", infuraToken);
 
 const alchemyToken = process.env.ALCHEMY_KOVAN_TOKEN;
 console.log("alchemyToken", alchemyToken);
@@ -15,6 +15,8 @@ const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider,
     options: {
+      // TODO(@rootulp): this HACKHACK WalletConnect isn't working b/c it claims
+      // this environment variable isn't provided
       infuraId: process.env.INFURA_TOKEN,
     },
   },
@@ -49,10 +51,6 @@ type ActionType =
       address?: StateType['address']
     }
   | {
-      type: 'SET_CHAIN_ID'
-      chainId?: StateType['chainId']
-    }
-  | {
       type: 'RESET_WEB3_PROVIDER'
     }
 
@@ -62,6 +60,7 @@ const initialState: StateType = {
   address: undefined,
   chainId: undefined,
 }
+
 
 function reducer(state: StateType, action: ActionType): StateType {
   switch (action.type) {
@@ -77,11 +76,6 @@ function reducer(state: StateType, action: ActionType): StateType {
       return {
         ...state,
         address: action.address,
-      }
-    case 'SET_CHAIN_ID':
-      return {
-        ...state,
-        chainId: action.chainId,
       }
     case 'RESET_WEB3_PROVIDER':
       return initialState
@@ -104,10 +98,10 @@ export const Home = (): JSX.Element => {
     // event listeners such as `.on()` will be different.
     const web3Provider = new providers.Web3Provider(provider)
 
+    const network = await web3Provider.getNetwork()
     const signer = web3Provider.getSigner()
     const address = await signer.getAddress()
 
-    const network = await web3Provider.getNetwork()
 
     dispatch({
       type: 'SET_WEB3_PROVIDER',
@@ -181,37 +175,29 @@ export const Home = (): JSX.Element => {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Explore Sets</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <header>
-        {address && (
-          <div className="grid">
-            <div>
-              <p className="mb-1">Network:</p>
-              <p>{chainData?.name}</p>
-            </div>
-            <div>
-              <p className="mb-1">Address:</p>
-              <p>{ellipseAddress(address)}</p>
-            </div>
+        <div className="grid">
+          <div>
+            <p className="mb-1">Network: {chainData?.name}</p>
+            <p className="mb-1">Address:{ellipseAddress(address)}</p>
           </div>
-        )}
+          <div>
+            {web3Provider ? (
+              <button className="button" type="button" onClick={disconnect}>
+                Disconnect
+              </button>
+            ) : (
+              <button className="button" type="button" onClick={connect}>
+                Connect
+              </button>
+            )}
+          </div>
+        </div>
       </header>
-
-      <main>
-        <h1 className="title">Web3Modal Example</h1>
-        {web3Provider ? (
-          <button className="button" type="button" onClick={disconnect}>
-            Disconnect
-          </button>
-        ) : (
-          <button className="button" type="button" onClick={connect}>
-            Connect
-          </button>
-        )}
-      </main>
 
       <style jsx>{`
         main {
@@ -237,7 +223,7 @@ export const Home = (): JSX.Element => {
 
         .button {
           padding: 1rem 1.5rem;
-          background: ${web3Provider ? 'red' : 'green'};
+          background: ${web3Provider ? 'grey' : 'blue'};
           border: none;
           border-radius: 0.5rem;
           color: #fff;
