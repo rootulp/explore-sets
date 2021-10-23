@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@blueprintjs/core": "^3.51.2",
     "@walletconnect/web3-provider": "^1.6.5",
     "ethers": "5.4.6",
     "next": "11.1.2",
