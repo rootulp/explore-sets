@@ -15,8 +15,6 @@ const provider: BaseProvider = ethers.getDefaultProvider(network, {
   alchemy: alchemyToken,
 });
 
-// TODO(@rootulp): the types of providers conflict between ethers and set.js
-// Resolve the type conflict in order to remove the type assertion
 const set: Set = initializeSet(network, provider);
 
 interface HomeProps {

@@ -1,8 +1,6 @@
 import Set from "set.js"
 import { Provider } from "set.js/node_modules/@ethersproject/providers";
 
-type Network = "kovan" | "mainnet";
-
 interface SetAddresses {
     basicIssuance: string
     controller: string
@@ -45,22 +43,8 @@ const MAINNET_SET_ADDRESSES: SetAddresses = {
     streamingFee: "0x08f866c74205617B6F3903EF481798EcED10cDEC",
     tradeModule: "0x90F765F63E7DC5aE97d6c576BF693FB6AF41C129"
 }
-export function initializeSet(network: Network, ethersProvider: Provider): Set {
-    if (network === "kovan") {
-        return new Set({
-            ethersProvider,
-            basicIssuanceModuleAddress: KOVAN_SET_ADDRESSES.basicIssuance,
-            controllerAddress: KOVAN_SET_ADDRESSES.controller,
-            masterOracleAddress: KOVAN_SET_ADDRESSES.masterOracle,
-            navIssuanceModuleAddress: KOVAN_SET_ADDRESSES.navIssuance,
-            protocolViewerAddress: KOVAN_SET_ADDRESSES.protocolViewer,
-            setTokenCreatorAddress: KOVAN_SET_ADDRESSES.setTokenCreator,
-            streamingFeeModuleAddress: KOVAN_SET_ADDRESSES.streamingFee,
-            tradeModuleAddress: KOVAN_SET_ADDRESSES.tradeModule,
-            governanceModuleAddress: KOVAN_SET_ADDRESSES.governance,
-            debtIssuanceModuleAddress: KOVAN_SET_ADDRESSES.debtIssuance,
-        });
-    } else if (network === "mainnet") {
+export function initializeSet(chainId: number, ethersProvider: Provider): Set {
+    if (chainId === 1) {
         return new Set({
             ethersProvider,
             basicIssuanceModuleAddress: MAINNET_SET_ADDRESSES.basicIssuance,
@@ -75,5 +59,20 @@ export function initializeSet(network: Network, ethersProvider: Provider): Set {
             debtIssuanceModuleAddress: MAINNET_SET_ADDRESSES.debtIssuance,
         });
     }
-    throw new Error(`Unsupported network ${network}`)
+    if (chainId === 42) {
+        return new Set({
+            ethersProvider,
+            basicIssuanceModuleAddress: KOVAN_SET_ADDRESSES.basicIssuance,
+            controllerAddress: KOVAN_SET_ADDRESSES.controller,
+            masterOracleAddress: KOVAN_SET_ADDRESSES.masterOracle,
+            navIssuanceModuleAddress: KOVAN_SET_ADDRESSES.navIssuance,
+            protocolViewerAddress: KOVAN_SET_ADDRESSES.protocolViewer,
+            setTokenCreatorAddress: KOVAN_SET_ADDRESSES.setTokenCreator,
+            streamingFeeModuleAddress: KOVAN_SET_ADDRESSES.streamingFee,
+            tradeModuleAddress: KOVAN_SET_ADDRESSES.tradeModule,
+            governanceModuleAddress: KOVAN_SET_ADDRESSES.governance,
+            debtIssuanceModuleAddress: KOVAN_SET_ADDRESSES.debtIssuance,
+        });
+    }
+    throw new Error(`Unsupported chainId ${chainId}`)
 }

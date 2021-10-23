@@ -1,9 +1,12 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
+import Set from "set.js";
 import { providers } from 'ethers'
 import Head from 'next/head'
 import { useCallback, useEffect, useReducer } from 'react'
 import Web3Modal from 'web3modal'
 import { ellipseAddress, getChainData } from '../lib/utilities'
+import {SetList} from "../lib/setList"
+
 
 const infuraToken = process.env.INFURA_TOKEN;
 console.log("infuraToken", infuraToken);
@@ -33,7 +36,7 @@ if (typeof window !== 'undefined') {
 
 type StateType = {
   provider?: any
-  web3Provider?: any
+  web3Provider?: providers.Web3Provider
   address?: string
   chainId?: number
 }
@@ -101,7 +104,6 @@ export const Home = (): JSX.Element => {
     const network = await web3Provider.getNetwork()
     const signer = web3Provider.getSigner()
     const address = await signer.getAddress()
-
 
     dispatch({
       type: 'SET_WEB3_PROVIDER',
@@ -198,6 +200,8 @@ export const Home = (): JSX.Element => {
           </div>
         </div>
       </header>
+
+    {chainId && web3Provider && <SetList chainId={chainId} provider={web3Provider} />}
 
       <style jsx>{`
         main {
