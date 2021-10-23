@@ -1,6 +1,6 @@
-import { Card, Elevation } from "@blueprintjs/core"
 import React from "react"
 import { Position } from "set.js/dist/types/src/types"
+import styles from "../styles/Home.module.css"
 
 interface SetCardProps {
     name: string,
@@ -10,10 +10,10 @@ interface SetCardProps {
 
 export const SetCard = (props: SetCardProps): JSX.Element => {
     return (
-        <Card key={props.symbol} elevation={Elevation.TWO}>
-            <h5>{props.name}</h5>
+        <div key={props.symbol} className={styles.card}>
+            <h4>{props.name}</h4>
             <p>Symbol: {props.symbol}</p>
             <p>Positions length: {props.positions?.length}</p>
-        </Card>
+        </div>
     )
 }

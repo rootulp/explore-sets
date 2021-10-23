@@ -179,9 +179,6 @@ export const Home = (): JSX.Element => {
       <Head>
         <title>Explore Sets</title>
         <link rel="icon" href="/favicon.ico" />
-        <link href="https://unpkg.com/normalize.css@^7.0.0" rel="stylesheet" />
-        <link href="https://unpkg.com/@blueprintjs/icons@^3.0.0/lib/css/blueprint-icons.css" rel="stylesheet" />
-        <link href="https://unpkg.com/@blueprintjs/core@^3.0.0/lib/css/blueprint.css" rel="stylesheet" />
       </Head>
 
       <header>

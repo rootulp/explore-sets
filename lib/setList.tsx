@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import { SetDetails } from "set.js/dist/types/src/types"
 import { SetCard } from "./setCard"
 import { getModuleAddresses, initializeSet, MAINNET_SET_ADDRESSES } from "./setJsApi"
+import styles from "../styles/Home.module.css"
 
 interface SetListProps {
     chainId: number
@@ -38,7 +39,9 @@ export const SetList = (props: SetListProps): JSX.Element => {
     return (
         <div>
             <h3>Set List</h3>
-            {setDetails.map(setDetail => <SetCard name={setDetail.name} symbol={setDetail.symbol} positions={setDetail.positions} />) }
+            <div className={styles.grid}>
+                {setDetails.map(setDetail => <SetCard name={setDetail.name} symbol={setDetail.symbol} positions={setDetail.positions} />) }
+            </div>
         </div>
     )
 }
