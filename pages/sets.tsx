@@ -5,7 +5,7 @@ import React from "react"
 import styles from '../styles/Home.module.css'
 import { BaseProvider } from "@ethersproject/providers";
 import Set from "set.js";
-import { initializeSet } from "../src/setJsApi";
+import { initializeSet } from "../lib/setJsApi";
 
 const network = "kovan";
 const alchemyToken = process.env.ALCHEMY_KOVAN_TOKEN;
