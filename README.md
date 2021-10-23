@@ -29,7 +29,7 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 - [X] Set up an Alchemy project
 - [X] Configure an Ethers provider
 - [X] Create a page for all Set cards. Possible URL path `/sets`
-- [ ] Read basic Set info from Set.js
+- [X] Read basic Set info from Set.js
 - [ ] Populate cards
 - [ ] Style cards in a 3 x 1 grid
 - [ ] Add a network selector to switch between mainnet and Kovan

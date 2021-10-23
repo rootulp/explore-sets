@@ -76,3 +76,24 @@ export function initializeSet(chainId: number, ethersProvider: Provider): Set {
     }
     throw new Error(`Unsupported chainId ${chainId}`)
 }
+
+export function getModuleAddresses(chainId: number): string[] {
+    if (chainId === 1) {
+        return [
+            MAINNET_SET_ADDRESSES.basicIssuance,
+            MAINNET_SET_ADDRESSES.streamingFee,
+            MAINNET_SET_ADDRESSES.tradeModule,
+            MAINNET_SET_ADDRESSES.debtIssuance,
+        ];
+    }
+    if (chainId === 42) {
+        return [
+            KOVAN_SET_ADDRESSES.basicIssuance,
+            KOVAN_SET_ADDRESSES.streamingFee,
+            KOVAN_SET_ADDRESSES.tradeModule,
+            KOVAN_SET_ADDRESSES.debtIssuance,
+        ]
+    }
+    throw new Error(`Unsupported chainId ${chainId}`)
+
+}

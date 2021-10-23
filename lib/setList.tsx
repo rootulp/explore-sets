@@ -1,6 +1,7 @@
 import { providers } from "ethers"
-import { useEffect, useState } from "react"
-import { initializeSet } from "./setJsApi"
+import React, { useEffect, useState } from "react"
+import { SetCard } from "./setCard"
+import { getModuleAddresses, initializeSet } from "./setJsApi"
 
 interface SetListProps {
     chainId: number
@@ -16,7 +17,7 @@ export const SetList = (props: SetListProps): JSX.Element => {
         setIsLoading(true)
         async function fetchSets() {
             set.system.getSetsAsync().then(data => {
-                setSets(data)
+                setSets(data.slice(0, 9)) // cap this to the first 10 entries during development
                 setIsLoading(false)
             })
         }
@@ -33,13 +34,7 @@ export const SetList = (props: SetListProps): JSX.Element => {
     return (
         <div>
             <h3>Set List</h3>
-            {sets.map(set => {
-                return (
-                    <div>
-                        {set}
-                    </div>
-                )
-            })}
+            {sets.map(tokenAddress => <SetCard chainId={props.chainId} provider={props.provider} tokenAddress={tokenAddress} />) }
         </div>
     )
 }
