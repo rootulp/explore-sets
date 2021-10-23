@@ -33,7 +33,7 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 - [X] Populate cards
 - [X] Style cards in a 3 x 1 grid
 - [ ] Add a network selector to switch between mainnet and Kovan
-- [ ] Add back other chains to chains.ts
+- [X] Add back other chains to chains.ts
 - [ ] Display an error if on an unsupported chain
 
 ## Extra credit
