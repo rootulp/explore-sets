@@ -184,8 +184,8 @@ export const Home = (): JSX.Element => {
       <header>
         <div className="grid">
           <div>
-            <p className="mb-1">Network: {chainData?.name}</p>
-            <p className="mb-1">Address:{ellipseAddress(address)}</p>
+            <p>Network: {chainData?.name}</p>
+            <p>Address: {ellipseAddress(address)}</p>
           </div>
           <div>
             {web3Provider ? (
@@ -209,10 +209,6 @@ export const Home = (): JSX.Element => {
           text-align: center;
         }
 
-        p {
-          margin-top: 0;
-        }
-
         .container {
           padding: 2rem;
           margin: 0 auto;
@@ -226,36 +222,14 @@ export const Home = (): JSX.Element => {
         }
 
         .button {
-          padding: 1rem 1.5rem;
+          padding: 1rem;
           background: ${web3Provider ? 'grey' : 'blue'};
           border: none;
-          border-radius: 0.5rem;
           color: #fff;
-          font-size: 1.2rem;
-        }
-
-        .mb-0 {
-          margin-bottom: 0;
-        }
-        .mb-1 {
-          margin-bottom: 0.25rem;
+          font-size: 1rem;
         }
       `}</style>
 
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
     </div>
   )
 }

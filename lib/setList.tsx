@@ -1,7 +1,5 @@
-import { Provider } from "@ethersproject/abstract-provider"
 import { providers } from "ethers"
 import { useEffect, useState } from "react"
-import useSWR from "swr"
 import { initializeSet } from "./setJsApi"
 
 interface SetListProps {
@@ -10,7 +8,7 @@ interface SetListProps {
 }
 
 export const SetList = (props: SetListProps): JSX.Element => {
-    const [ sets, setSets ] = useState<string[]>()
+    const [sets, setSets] = useState<string[]>()
     const [isLoading, setIsLoading] = useState(false)
 
     const set = initializeSet(props.chainId, props.provider)
@@ -26,10 +24,10 @@ export const SetList = (props: SetListProps): JSX.Element => {
     }, [])
 
     if (isLoading) {
-        return <p>Loading....</p>
+        return <p>Loading...</p>
     }
     if (!sets) {
-        return <p>No List to show</p>
+        return <p>No sets to display</p>
     }
 
     return (
