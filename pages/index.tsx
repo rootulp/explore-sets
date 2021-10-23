@@ -1,8 +1,8 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
-import { providers } from 'ethers'
+import { ethers, providers } from 'ethers'
+import { arrayify } from "ethers/lib/utils"
 import Head from 'next/head'
 import { useCallback, useEffect, useReducer } from 'react'
-import WalletLink from 'walletlink'
 import Web3Modal from 'web3modal'
 import { ellipseAddress, getChainData } from '../lib/utilities'
 
@@ -15,31 +15,9 @@ const providerOptions = {
       infuraId: INFURA_ID, // required
     },
   },
-  'custom-walletlink': {
-    display: {
-      logo: 'https://play-lh.googleusercontent.com/PjoJoG27miSglVBXoXrxBSLveV6e3EeBPpNY55aiUUBM9Q1RCETKCOqdOkX2ZydqVf0',
-      name: 'Coinbase',
-      description: 'Connect to Coinbase Wallet (not Coinbase App)',
-    },
-    options: {
-      appName: 'Coinbase', // Your app name
-      networkUrl: `https://mainnet.infura.io/v3/${INFURA_ID}`,
-      chainId: 1,
-    },
-    package: WalletLink,
-    connector: async (_, options) => {
-      const { appName, networkUrl, chainId } = options
-      const walletLink = new WalletLink({
-        appName,
-      })
-      const provider = walletLink.makeWeb3Provider(networkUrl, chainId)
-      await provider.enable()
-      return provider
-    },
-  },
 }
 
-let web3Modal
+let web3Modal: Web3Modal
 if (typeof window !== 'undefined') {
   web3Modal = new Web3Modal({
     network: 'mainnet', // optional
@@ -76,10 +54,10 @@ type ActionType =
     }
 
 const initialState: StateType = {
-  provider: null,
-  web3Provider: null,
-  address: null,
-  chainId: null,
+  provider: undefined,
+  web3Provider: undefined,
+  address: undefined,
+  chainId: undefined,
 }
 
 function reducer(state: StateType, action: ActionType): StateType {
@@ -163,7 +141,6 @@ export const Home = (): JSX.Element => {
   useEffect(() => {
     if (provider?.on) {
       const handleAccountsChanged = (accounts: string[]) => {
-        // eslint-disable-next-line no-console
         console.log('accountsChanged', accounts)
         dispatch({
           type: 'SET_ADDRESS',
@@ -171,23 +148,18 @@ export const Home = (): JSX.Element => {
         })
       }
 
-      const handleChainChanged = (accounts: string[]) => {
-        // eslint-disable-next-line no-console
-        console.log('accountsChanged', accounts)
-        dispatch({
-          type: 'SET_ADDRESS',
-          address: accounts[0],
-        })
-      }
+      // https://docs.ethers.io/v5/concepts/best-practices/#best-practices--network-changes
+      const handleChainChanged = (hexChainId: string) => {
+        window.location.reload();
+    }
 
       const handleDisconnect = (error: { code: number; message: string }) => {
-        // eslint-disable-next-line no-console
         console.log('disconnect', error)
         disconnect()
       }
 
       provider.on('accountsChanged', handleAccountsChanged)
-      provider.on('chainChanged', handleChainChanged)
+      provider.on('chainChanged', handleChainChanged);
       provider.on('disconnect', handleDisconnect)
 
       // Subscription Cleanup
