@@ -1,7 +1,8 @@
 import { providers } from "ethers"
 import React, { useEffect, useState } from "react"
+import { SetDetails } from "set.js/dist/types/src/types"
 import { SetCard } from "./setCard"
-import { getModuleAddresses, initializeSet } from "./setJsApi"
+import { getModuleAddresses, initializeSet, MAINNET_SET_ADDRESSES } from "./setJsApi"
 
 interface SetListProps {
     chainId: number
@@ -9,32 +10,37 @@ interface SetListProps {
 }
 
 export const SetList = (props: SetListProps): JSX.Element => {
-    const [sets, setSets] = useState<string[]>()
+    const [setDetails, setSetDetails] = useState<SetDetails[]>()
     const [isLoading, setIsLoading] = useState(false)
 
     const set = initializeSet(props.chainId, props.provider)
     useEffect(() => {
         setIsLoading(true)
-        async function fetchSets() {
-            set.system.getSetsAsync().then(data => {
-                setSets(data.slice(0, 9)) // cap this to the first 10 entries during development
-                setIsLoading(false)
-            })
+        async function fetchSetDetails() {
+            const tokenAddresses = await set.system.getSetsAsync()
+            const moduleAddresses =  getModuleAddresses(props.chainId)
+            console.log(`moduleAddresses: `, moduleAddresses)
+            const foo = tokenAddresses.slice(0, 2)
+            console.log(`tokenAddresses: `, foo)
+            const result = await set.setToken.batchFetchSetDetailsAsync(foo, moduleAddresses)
+            setSetDetails(result)
+            setIsLoading(false)
         }
-        fetchSets()
+
+        fetchSetDetails()
     }, [])
 
     if (isLoading) {
         return <p>Loading...</p>
     }
-    if (!sets) {
-        return <p>No sets to display</p>
+    if (!setDetails) {
+        return <p>No set details</p>
     }
 
     return (
         <div>
             <h3>Set List</h3>
-            {sets.map(tokenAddress => <SetCard chainId={props.chainId} provider={props.provider} tokenAddress={tokenAddress} />) }
+            {setDetails.map(setDetail => <SetCard setDetail={setDetail} />) }
         </div>
     )
 }
