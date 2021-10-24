@@ -25,6 +25,7 @@ export const KOVAN_SET_ADDRESSES: SetAddresses = {
     masterOracle: "0xDFEA02F2824Ee177733d6f108005E95C85D1D4bE",
     navIssuance: "https://kovan.etherscan.io/address/0x5dB52450a8C0eb5e0B777D4e08d7A93dA5a9c848",
     // protocolViewer doesn't exist on https://docs.tokensets.com/contracts/deployed/protocol
+    // Kovan won't work until this field is populated
     protocolViewer: "",
     setTokenCreator: "0xB24F7367ee8efcB5EAbe4491B42fA222EC68d411",
     streamingFee: "0xE038E59DEEC8657d105B6a3Fb5040b3a6189Dd51",
