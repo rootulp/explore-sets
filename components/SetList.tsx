@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { SetDetails } from "set.js/dist/types/src/types"
-import { SetCard } from "./SetCard"
+import { LoadingSetCard, SetCard } from "./SetCard"
 import { getModuleAddresses, initializeSet } from "../lib/setJsApi"
 import styles from "../styles/SetList.module.css"
 import { useWeb3React } from "@web3-react/core"
-import { uniq } from "lodash-es";
+import { range, uniq } from "lodash-es";
 import { UnsupportedChainIdError } from '@web3-react/core'
 import { getChainName } from "@usedapp/core"
 import { supportedChainIds } from "../lib/connector"
+
+const NUMBER_OF_SETS_TO_FETCH = 10;
 
 interface SetAttribute extends Pick<SetDetails, "name" | "symbol" | "positions"> {
     tokenAddress: string;
@@ -28,7 +30,7 @@ export const SetList = (): JSX.Element => {
                 return;
             }
             // Limit to the first 10 token addresses during development
-            const tokenAddresses = uniq(await (await set.system.getSetsAsync()).slice(0, 10))
+            const tokenAddresses = uniq(await (await set.system.getSetsAsync()).slice(0, NUMBER_OF_SETS_TO_FETCH))
             const moduleAddresses =  getModuleAddresses(chainId)
             const setDetails = await set.setToken.batchFetchSetDetailsAsync(tokenAddresses, moduleAddresses)
             const result = setDetails.map((setDetail, i) => {
@@ -57,7 +59,9 @@ export const SetList = (): JSX.Element => {
         return (
         <div className={styles.setList}>
             <h3>Set List</h3>
-            <p>Loading...</p>
+            <div className={styles.grid}>
+                {range(NUMBER_OF_SETS_TO_FETCH).map(i => <LoadingSetCard />)}
+            </div>
         </div>
         )
     }

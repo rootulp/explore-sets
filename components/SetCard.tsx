@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, ListGroup } from "react-bootstrap"
+import { Card, ListGroup, Placeholder } from "react-bootstrap"
 import { Position } from "set.js/dist/types/src/types"
 import {Position as PositionComponent} from "./Position"
 import styles from "../styles/SetCard.module.css"
@@ -22,4 +22,20 @@ export const SetCard = (props: SetCardProps): JSX.Element => {
             </ListGroup>
         </Card>
     )
+}
+
+export const LoadingSetCard = (): JSX.Element => {
+    return (
+        <Card className={styles.card}>
+            <Card.Body>
+                <Placeholder as={Card.Title} animation="glow">
+                    <Placeholder xs={6} />
+                </Placeholder>
+                <Placeholder as={Card.Subtitle} animation="glow">
+                    <Placeholder xs={7} /> <Placeholder xs={4} />
+                </Placeholder>
+            </Card.Body>
+        </Card>
+    )
+
 }

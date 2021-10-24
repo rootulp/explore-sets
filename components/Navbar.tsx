@@ -1,4 +1,4 @@
-import { getChainName, shortenAddress } from "@usedapp/core"
+import { getChainName, getExplorerAddressLink, shortenAddress } from "@usedapp/core"
 import { useWeb3React } from "@web3-react/core"
 import { injected } from "../lib/connector"
 import styles from "../styles/Navbar.module.css"
@@ -23,13 +23,18 @@ export const Navbar = (): JSX.Element => {
             console.log(e)
         }
     }
+
+    const signedInWithText = account && chainId && (
+      <BootstrapNavbar.Text>
+        Signed in with: <a href={getExplorerAddressLink(account, chainId)}>{shortenAddress(account)}</a> on {getChainName(chainId)}
+      </BootstrapNavbar.Text>
+    )
+
     return (
       <BootstrapNavbar fixed="top" variant="dark" bg="dark">
         <Container>
           <BootstrapNavbar.Brand>Explore Sets</BootstrapNavbar.Brand>
-          {account && chainId && (<BootstrapNavbar.Text>
-            Signed in with: {shortenAddress(account)} on {getChainName(chainId)}
-          </BootstrapNavbar.Text>)}
+          {signedInWithText}
             {active ? (
               <Button onClick={disconnect} variant="secondary">
                 Disconnect

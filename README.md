@@ -27,9 +27,9 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 ## Extra credit
 - [ ] Add tests
 - [ ] Answer questions in PDF
-- [ ] Style Navbar
+- [X] Style Navbar
 - [ ] Reduce the precision of position values
-- [ ] Improve loading states
+- [X] Improve loading states
 - [ ] Add ESLint
 - [ ] Move Set to a context
 - [ ] Set detail page. Possible URL path `/set/[:symbol]`
