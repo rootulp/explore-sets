@@ -5,7 +5,7 @@ import {Button, Container, Navbar as BootstrapNavbar} from "react-bootstrap";
 import React from "react";
 
 export const Navbar = (): JSX.Element => {
-    const { active, account, chainId, activate, deactivate } = useWeb3React()
+    const { active, account, chainId, activate, deactivate, error } = useWeb3React()
 
     async function connect() {
         try {
@@ -23,6 +23,10 @@ export const Navbar = (): JSX.Element => {
         }
     }
 
+    const errorText = error && (
+      <BootstrapNavbar.Text>{error}</BootstrapNavbar.Text>
+    )
+
     const signedInWithText = account && chainId && (
       <BootstrapNavbar.Text>
         Signed in with: <a href={getExplorerAddressLink(account, chainId)}>{shortenAddress(account)}</a> on {getChainName(chainId)}
@@ -34,6 +38,7 @@ export const Navbar = (): JSX.Element => {
         <Container>
           <BootstrapNavbar.Brand>Explore Sets</BootstrapNavbar.Brand>
           {signedInWithText}
+          {errorText}
             {active ? (
               <Button onClick={disconnect} variant="secondary">
                 Disconnect

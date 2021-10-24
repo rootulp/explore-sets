@@ -28,12 +28,12 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 - [X] Style Navbar
 - [X] Improve loading states
 - [X] Extract Set initialization to a hook
+- [X] Answer questions in FAQ
 - [ ] Add ENS support
 - [ ] Make Coingecko API more robust. Getting throttled currently
 - [ ] Sort positions based on most valuable in descending order
-- [ ] Visually differentiate
+- [ ] Visually differentiate different cards
 - [ ] Add tests
-- [ ] Answer questions in PDF
 - [ ] Reduce the precision of position values
 - [ ] Add ESLint
 - [ ] Set detail page. Possible URL path `/set/[:symbol]`
