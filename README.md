@@ -25,11 +25,12 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 - [X] Display an error if on an unsupported chain
 
 ## Extra credit
+- [X] Style Navbar
+- [X] Improve loading states
+- [ ] Make Coingecko API more robuse. Getting throttled currently
 - [ ] Add tests
 - [ ] Answer questions in PDF
-- [X] Style Navbar
 - [ ] Reduce the precision of position values
-- [X] Improve loading states
 - [ ] Add ESLint
 - [ ] Move Set to a context
 - [ ] Set detail page. Possible URL path `/set/[:symbol]`

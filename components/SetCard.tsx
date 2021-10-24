@@ -14,20 +14,8 @@ interface SetCardProps {
 }
 
 export const SetCard = (props: SetCardProps): JSX.Element => {
-    const {chainId} = useWeb3React();
-    const { token, isLoading, isError } = useCoingeckoToken(props.address, chainId);
-
-    if (isLoading) {
-        return LoadingSetCard()
-    }
-
-    if (isError) {
-        return <React.Fragment/>
-    }
-
     return (
         <Card className={styles.card}>
-            {token?.image?.large && <Card.Img variant="top" src={token.image.small} />}
             <Card.Body>
                 <Card.Title>{props.name}</Card.Title>
                 <Card.Subtitle>{props.symbol}</Card.Subtitle>
@@ -44,7 +32,7 @@ interface LoadingSetCardProps {
 }
 export const LoadingSetCard = (props: LoadingSetCardProps): JSX.Element => {
     return (
-        <Card className={styles.card} key={index}>
+        <Card className={styles.card} key={props.index}>
             <Card.Body>
                 <Placeholder as={Card.Title} animation="glow">
                     <Placeholder xs={6} />
