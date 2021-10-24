@@ -1,3 +1,4 @@
+import { ChainId, getExplorerAddressLink } from "@usedapp/core"
 import { ethers } from "@usedapp/core/node_modules/ethers"
 import { BigNumber } from "ethers"
 import React from "react"
@@ -15,8 +16,11 @@ interface SetCardProps {
 export const SetCard = (props: SetCardProps): JSX.Element => {
     return (
         <div key={props.symbol} className={styles.card}>
-            <h4>{props.name}</h4>
-            <p>Symbol: {props.symbol}</p>
+            <div className={styles.cardHeader}>
+                <p className={styles.cardName}>{props.name}</p>
+                <p className={styles.symbol}>{props.symbol}</p>
+            </div>
+            Positions
             {props.positions.map(position => <PositionComponent address={position.component} quantity={position.unit} />)}
         </div>
     )
@@ -26,8 +30,11 @@ interface PositionComponentProps {
     address: string,
     quantity: BigNumber,
 }
+
 const PositionComponent = (props: PositionComponentProps): JSX.Element => {
+    // TODO(@rootulp) stop hard-coding chainId
     const { token, isLoading, isError } = useCoingeckoToken(1, props.address);
+    const link = getExplorerAddressLink(props.address, ChainId.Mainnet)
 
     if (isLoading){
         return (<div key={props.address}>Loading</div>)
@@ -36,6 +43,6 @@ const PositionComponent = (props: PositionComponentProps): JSX.Element => {
         return (<div key={props.address}>Error</div>)
     }
     return (
-        <div key={props.address}>{token.name}: {ethers.utils.formatEther(props.quantity)}</div>
+        <div key={props.address}><a href={link}>{token.name}</a>: {ethers.utils.formatEther(props.quantity)}</div>
     )
 }
