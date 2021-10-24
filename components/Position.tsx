@@ -22,7 +22,7 @@ export const Position = (props: PositionProps): JSX.Element => {
     }
     return (
         <ListGroupItem key={props.address}>
-            {chainId && <a href={getExplorerAddressLink(props.address, chainId)}>{token.name}</a>}: {ethers.utils.commify(ethers.utils.formatEther(props.quantity))}
+            {token.name}: {ethers.utils.commify(ethers.utils.formatEther(props.quantity))}
         </ListGroupItem>
     )
 }
