@@ -1,7 +1,7 @@
 import React from "react"
 import { Position } from "set.js/dist/types/src/types"
 import styles from "../styles/Home.module.css"
-import {Position as PositionComponent} from "./Position"
+import {Position as PositionComponent} from "../components/Position"
 
 interface SetCardProps {
     name: string,

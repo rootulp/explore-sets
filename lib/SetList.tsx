@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { SetDetails } from "set.js/dist/types/src/types"
 import { SetCard } from "./SetCard"
-import { getModuleAddresses, initializeSet } from "../lib/setJsApi"
+import { getModuleAddresses, initializeSet } from "./setJsApi"
 import styles from "../styles/Home.module.css"
 import { useWeb3React } from "@web3-react/core"
 import { uniq } from "lodash-es";
 import { UnsupportedChainIdError } from '@web3-react/core'
 import { getChainName } from "@usedapp/core"
-import { supportedChainIds } from "../lib/connector"
+import { supportedChainIds } from "./connector"
 
 interface SetAttribute extends Pick<SetDetails, "name" | "symbol" | "positions"> {
     tokenAddress: string;
