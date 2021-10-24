@@ -1,11 +1,11 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
-import Set from "set.js";
 import { providers } from 'ethers'
 import Head from 'next/head'
 import { useCallback, useEffect, useReducer } from 'react'
 import Web3Modal from 'web3modal'
 import { ellipseAddress, getChainData } from '../lib/utilities'
 import {SetList} from "../lib/setList"
+import styles from "../styles/Home.module.css"
 
 
 const infuraToken = process.env.INFURA_TOKEN;
@@ -182,10 +182,10 @@ export const Home = (): JSX.Element => {
       </Head>
 
       <header>
-        <div className="grid">
+        <div className={styles.navbar}>
           <div>
-            <p>Network: {chainData?.name}</p>
-            <p>Address: {ellipseAddress(address)}</p>
+            <div>Network: {chainData?.name}</div>
+            <div>Address: {ellipseAddress(address)}</div>
           </div>
           <div>
             {web3Provider ? (
@@ -213,12 +213,6 @@ export const Home = (): JSX.Element => {
           padding: 2rem;
           margin: 0 auto;
           max-width: 1200px;
-        }
-
-        .grid {
-          display: grid;
-          grid-template-columns: auto auto;
-          justify-content: space-between;
         }
 
         .button {
