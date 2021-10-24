@@ -7,7 +7,6 @@ import React from "react";
 export const Navbar = (): JSX.Element => {
     const { active, account, chainId, activate, deactivate } = useWeb3React()
     const ens = useLookupAddress();
-    console.log(ens);
 
     async function connect() {
         try {

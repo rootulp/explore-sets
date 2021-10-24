@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { SetDetails } from "set.js/dist/types/src/types"
 import { LoadingSetCard, SetCard } from "./SetCard"
-import { getModuleAddresses, initializeSet } from "../lib/setJsApi"
+import { getModuleAddresses } from "../lib/setJsApi"
 import styles from "../styles/SetList.module.css"
 import { useWeb3React } from "@web3-react/core"
 import { range, uniq } from "lodash-es";
 import { UnsupportedChainIdError } from '@web3-react/core'
 import { getChainName } from "@usedapp/core"
 import { supportedChainIds } from "../lib/connector"
+import { useSet } from "../lib/useSet"
 
 const NUMBER_OF_SETS_TO_FETCH = 10;
 
@@ -20,8 +21,8 @@ export const SetList = (): JSX.Element => {
     const [setAttributes, setSetAttributes] = useState<SetAttribute[]>()
     const [isLoading, setIsLoading] = useState(false)
     const isUnsupportedChainIdError = error instanceof UnsupportedChainIdError
+    const set = useSet()
 
-    const set = initializeSet(chainId, library)
     useEffect(() => {
         setIsLoading(true)
         async function fetchSetDetails() {

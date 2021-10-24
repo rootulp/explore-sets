@@ -46,44 +46,6 @@ export const MAINNET_SET_ADDRESSES: SetAddresses = {
     streamingFee: "0x08f866c74205617B6F3903EF481798EcED10cDEC",
     tradeModule: "0x90F765F63E7DC5aE97d6c576BF693FB6AF41C129"
 }
-export function initializeSet(chainId?: number, ethersProvider?: providers.BaseProvider): Set | undefined {
-    if (ethersProvider === undefined) {
-        console.warn("Not initializing Set because a provider hasn't been provided")
-        return;
-    }
-
-    if (chainId === 1) {
-        return new Set({
-            ethersProvider,
-            basicIssuanceModuleAddress: MAINNET_SET_ADDRESSES.basicIssuance,
-            controllerAddress: MAINNET_SET_ADDRESSES.controller,
-            masterOracleAddress: MAINNET_SET_ADDRESSES.masterOracle,
-            navIssuanceModuleAddress: MAINNET_SET_ADDRESSES.navIssuance,
-            protocolViewerAddress: MAINNET_SET_ADDRESSES.protocolViewer,
-            setTokenCreatorAddress: MAINNET_SET_ADDRESSES.setTokenCreator,
-            streamingFeeModuleAddress: MAINNET_SET_ADDRESSES.streamingFee,
-            tradeModuleAddress: MAINNET_SET_ADDRESSES.tradeModule,
-            governanceModuleAddress: MAINNET_SET_ADDRESSES.governance,
-            debtIssuanceModuleAddress: MAINNET_SET_ADDRESSES.debtIssuance,
-        });
-    }
-    if (chainId === 42) {
-        return new Set({
-            ethersProvider,
-            basicIssuanceModuleAddress: KOVAN_SET_ADDRESSES.basicIssuance,
-            controllerAddress: KOVAN_SET_ADDRESSES.controller,
-            masterOracleAddress: KOVAN_SET_ADDRESSES.masterOracle,
-            navIssuanceModuleAddress: KOVAN_SET_ADDRESSES.navIssuance,
-            protocolViewerAddress: KOVAN_SET_ADDRESSES.protocolViewer,
-            setTokenCreatorAddress: KOVAN_SET_ADDRESSES.setTokenCreator,
-            streamingFeeModuleAddress: KOVAN_SET_ADDRESSES.streamingFee,
-            tradeModuleAddress: KOVAN_SET_ADDRESSES.tradeModule,
-            governanceModuleAddress: KOVAN_SET_ADDRESSES.governance,
-            debtIssuanceModuleAddress: KOVAN_SET_ADDRESSES.debtIssuance,
-        });
-    }
-    throw new Error(`Unsupported chainId ${chainId}`)
-}
 
 export function getModuleAddresses(chainId: number): string[] {
     if (chainId === 1) {
