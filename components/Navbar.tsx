@@ -9,17 +9,17 @@ export const Navbar = (): JSX.Element => {
 
     async function connect() {
         try {
-        await activate(injected)
-        } catch (ex) {
-        console.log(ex)
+            await activate(injected)
+        } catch (e) {
+            console.error(e)
         }
     }
 
     async function disconnect() {
         try {
-        deactivate()
-        } catch (ex) {
-        console.log(ex)
+            deactivate()
+        } catch (e) {
+            console.log(e)
         }
     }
     return (

@@ -1,7 +1,6 @@
-import { providers } from "ethers"
 import React, { useEffect, useState } from "react"
 import { SetDetails } from "set.js/dist/types/src/types"
-import { SetCard } from "./setCard"
+import { SetCard } from "./SetCard"
 import { getModuleAddresses, initializeSet } from "../lib/setJsApi"
 import styles from "../styles/Home.module.css"
 import { useWeb3React } from "@web3-react/core"

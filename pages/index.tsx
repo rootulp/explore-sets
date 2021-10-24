@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import {SetList} from "../components/setList"
-import { useWeb3React } from "@web3-react/core";
+import {SetList} from "../components/SetList"
 import React from "react";
 import { Navbar } from "../components/Navbar";
 import styles from "../styles/index.module.css"
@@ -13,14 +12,13 @@ console.log("alchemyToken", alchemyToken);
 
 export const Home = (): JSX.Element => {
   return (
-    <div className={styles.container}>
+    <div className={styles.home}>
       <Head>
         <title>Explore Sets</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-    <Navbar />
-    <SetList />
+      <Navbar />
+      <SetList />
     </div>
   )
 }
