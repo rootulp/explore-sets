@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {SetList} from "../lib/SetList"
+import {SetList} from "../components/SetList"
 import React from "react";
 import { Navbar } from "../components/Navbar";
 import styles from "../styles/index.module.css"
