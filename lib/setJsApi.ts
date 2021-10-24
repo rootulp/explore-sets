@@ -1,6 +1,3 @@
-import Set from "set.js"
-import {providers} from "ethers"
-
 interface SetAddresses {
     basicIssuance: string
     controller: string
