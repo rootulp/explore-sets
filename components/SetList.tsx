@@ -61,20 +61,12 @@ export const SetList = (): JSX.Element => {
         </div>
         )
     }
-    if (!setAttributes) {
-        return (
-        <div>
-            <h3>Set List</h3>
-            <p>No set attributes</p>
-        </div>
-        )
-    }
 
     return (
         <div>
             <h3>Set List</h3>
             <div className={styles.grid}>
-                {setAttributes.map(setDetail => <SetCard
+                {setAttributes && setAttributes.map(setDetail => <SetCard
                     name={setDetail.name}
                     symbol={setDetail.symbol}
                     positions={setDetail.positions}
