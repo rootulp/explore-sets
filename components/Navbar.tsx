@@ -2,6 +2,8 @@ import { getChainName, shortenAddress } from "@usedapp/core"
 import { useWeb3React } from "@web3-react/core"
 import { injected } from "../lib/connector"
 import styles from "../styles/Navbar.module.css"
+import {Button, Container, Navbar as BootstrapNavbar} from "react-bootstrap";
+import React from "react";
 
 export const Navbar = (): JSX.Element => {
     const { active, account, chainId, activate, deactivate } = useWeb3React()
@@ -22,24 +24,22 @@ export const Navbar = (): JSX.Element => {
         }
     }
     return (
-      <header>
-        <div className={styles.navbar}>
-          <div>
-            <div>Network: {chainId && getChainName(chainId)}</div>
-            <div>Address: {account && shortenAddress(account)}</div>
-          </div>
-          <div>
+      <BootstrapNavbar fixed="top" variant="dark" bg="dark">
+        <Container>
+          <BootstrapNavbar.Brand>Explore Sets</BootstrapNavbar.Brand>
+          {account && chainId && (<BootstrapNavbar.Text>
+            Signed in with: {shortenAddress(account)} on {getChainName(chainId)}
+          </BootstrapNavbar.Text>)}
             {active ? (
-              <button className={styles.disconnectButton} type="button" onClick={disconnect}>
+              <Button onClick={disconnect} variant="secondary">
                 Disconnect
-              </button>
+              </Button>
             ) : (
-              <button className={styles.connectButton} type="button" onClick={connect}>
+              <Button  onClick={connect} variant="primary">
                 Connect
-              </button>
+              </Button>
             )}
-          </div>
-        </div>
-      </header>
+          </Container>
+      </BootstrapNavbar>
     )
 }

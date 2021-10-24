@@ -46,7 +46,7 @@ export const SetList = (): JSX.Element => {
 
     if (isUnsupportedChainIdError) {
         return (
-        <div>
+        <div className={styles.setList}>
             <h3>Set List</h3>
             Please connect to a supported chain.
             Supported chains: {supportedChainIds.map(getChainName).join(", ")}
@@ -55,7 +55,7 @@ export const SetList = (): JSX.Element => {
     }
     if (isLoading) {
         return (
-        <div>
+        <div className={styles.setList}>
             <h3>Set List</h3>
             <p>Loading...</p>
         </div>
@@ -63,7 +63,7 @@ export const SetList = (): JSX.Element => {
     }
 
     return (
-        <div>
+        <div className={styles.setList}>
             <h3>Set List</h3>
             <div className={styles.grid}>
                 {setAttributes && setAttributes.map(setDetail => <SetCard
