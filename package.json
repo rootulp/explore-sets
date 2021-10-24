@@ -9,8 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/coingecko-api": "^1.0.2",
-    "@types/lodash-es": "^4.17.5",
     "@usedapp/core": "^0.5.4",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
@@ -25,6 +23,7 @@
     "swr": "^1.0.1"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.5",
     "@types/react": "17.0.31",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",

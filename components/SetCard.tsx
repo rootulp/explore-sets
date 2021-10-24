@@ -3,8 +3,6 @@ import { Card, ListGroup, Placeholder } from "react-bootstrap"
 import { Position } from "set.js/dist/types/src/types"
 import {Position as PositionComponent} from "./Position"
 import styles from "../styles/SetCard.module.css"
-import { useCoingeckoToken } from "../lib/useCoingeckoToken"
-import { useWeb3React } from "@web3-react/core"
 
 interface SetCardProps {
     address: string,
