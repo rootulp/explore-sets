@@ -1,12 +1,13 @@
-import { getChainName, getExplorerAddressLink, shortenAddress } from "@usedapp/core"
+import { getChainName, getExplorerAddressLink, shortenAddress, useLookupAddress } from "@usedapp/core"
 import { useWeb3React } from "@web3-react/core"
 import { injected } from "../lib/connector"
-import styles from "../styles/Navbar.module.css"
 import {Button, Container, Navbar as BootstrapNavbar} from "react-bootstrap";
 import React from "react";
 
 export const Navbar = (): JSX.Element => {
     const { active, account, chainId, activate, deactivate } = useWeb3React()
+    const ens = useLookupAddress();
+    console.log(ens);
 
     async function connect() {
         try {
@@ -26,7 +27,7 @@ export const Navbar = (): JSX.Element => {
 
     const signedInWithText = account && chainId && (
       <BootstrapNavbar.Text>
-        Signed in with: <a href={getExplorerAddressLink(account, chainId)}>{shortenAddress(account)}</a> on {getChainName(chainId)}
+        Signed in with: <a href={getExplorerAddressLink(account, chainId)}>{ens ?? shortenAddress(account)}</a> on {getChainName(chainId)}
       </BootstrapNavbar.Text>
     )
 
