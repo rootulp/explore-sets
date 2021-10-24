@@ -28,7 +28,7 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 - [X] Style Navbar
 - [X] Improve loading states
 - [X] Extract Set initialization to a hook
-- [ ] Figure out why ENS lookup doesn't work
+- [ ] Add ENS support
 - [ ] Make Coingecko API more robust. Getting throttled currently
 - [ ] Sort positions based on most valuable in descending order
 - [ ] Visually differentiate
