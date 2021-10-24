@@ -22,9 +22,16 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 - [X] Populate cards
 - [X] Style cards in a 3 x 1 grid
 - [X] Add back other chains to chains.ts
-- [ ] Display an error if on an unsupported chain
+- [X] Display an error if on an unsupported chain
 
 ## Extra credit
+- [ ] Style Navbar
+- [ ] Reduce the precision of position values
+- [ ] Improve loading states
+- [ ] Add ESLint
+- [ ] Move Set to a context
+- [ ] Add tests
+- [ ] Answer questions
 - [ ] Set detail page. Possible URL path `/set/[:symbol]`
 - [ ] List streaming fee on Set detail page
 - [ ] Surface price of Set token using CoinGecko API. Consider using [useDapp.useCoingeckoPrice](https://usedapp.readthedocs.io/en/latest/coingecko.html#hooks)
