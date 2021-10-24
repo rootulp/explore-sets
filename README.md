@@ -37,7 +37,7 @@ Extra credit
 - [X] Improve loading states
 - [X] Extract Set initialization to a hook
 - [X] Answer questions in FAQ
-- [ ] Use `@web3-react/network-connector` to provide a default web3 provider when user hasn't connected wallet
+- [X] Use `@web3-react/network-connector` to provide a default web3 provider when user hasn't connected wallet
 - [ ] Add ENS support
 - [ ] Make Coingecko API more robust. Getting throttled currently
 - [ ] Sort positions based on most valuable in descending order
