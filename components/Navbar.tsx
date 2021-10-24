@@ -1,7 +1,6 @@
-import { getChainName } from "@usedapp/core"
+import { getChainName, shortenAddress } from "@usedapp/core"
 import { useWeb3React } from "@web3-react/core"
 import { injected } from "../lib/connector"
-import { ellipseAddress } from "../lib/utilities"
 import styles from "../styles/Navbar.module.css"
 
 export const Navbar = (): JSX.Element => {
@@ -27,7 +26,7 @@ export const Navbar = (): JSX.Element => {
         <div className={styles.navbar}>
           <div>
             <div>Network: {chainId && getChainName(chainId)}</div>
-            <div>Address: {account && ellipseAddress(account)}</div>
+            <div>Address: {account && shortenAddress(account)}</div>
           </div>
           <div>
             {active ? (

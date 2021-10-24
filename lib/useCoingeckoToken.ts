@@ -7,7 +7,14 @@ interface CoingeckoToken {
     isError: boolean
 }
 
-export function useCoingeckoToken(chainId: number, address: string): CoingeckoToken {
+export function useCoingeckoToken(address: string, chainId?: number): CoingeckoToken {
+    if (!chainId) {
+        return {
+            token: {} as CoinGeckoTokenData,
+            isLoading: false,
+            isError: true
+        }
+    }
     const assetPlatform = getAssetPlatform(chainId);
     const fetcher = (url: string) => fetch(url).then(res => res.json())
     const {data, error} = useSWR(`https://api.coingecko.com/api/v3/coins/${assetPlatform}/contract/${address}`, fetcher)

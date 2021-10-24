@@ -5,15 +5,19 @@ import { getModuleAddresses, initializeSet } from "../lib/setJsApi"
 import styles from "../styles/Home.module.css"
 import { useWeb3React } from "@web3-react/core"
 import { uniq } from "lodash-es";
+import { UnsupportedChainIdError } from '@web3-react/core'
+import { getChainName } from "@usedapp/core"
+import { supportedChainIds } from "../lib/connector"
 
-interface SetInfo extends Pick<SetDetails, "name" | "symbol" | "positions"> {
+interface SetAttribute extends Pick<SetDetails, "name" | "symbol" | "positions"> {
     tokenAddress: string;
 }
 
 export const SetList = (): JSX.Element => {
-    const { chainId, library } = useWeb3React()
-    const [setDetails, setSetDetails] = useState<SetInfo[]>()
+    const { chainId, library, error } = useWeb3React()
+    const [setAttributes, setSetAttributes] = useState<SetAttribute[]>()
     const [isLoading, setIsLoading] = useState(false)
+    const isUnsupportedChainIdError = error instanceof UnsupportedChainIdError
 
     const set = initializeSet(chainId, library)
     useEffect(() => {
@@ -33,25 +37,44 @@ export const SetList = (): JSX.Element => {
                     ...setDetail,
                 }
             })
-            setSetDetails(result)
+            setSetAttributes(result)
             setIsLoading(false)
         }
 
         fetchSetDetails()
     }, [chainId, library])
 
-    if (isLoading) {
-        return <p>Loading...</p>
+    if (isUnsupportedChainIdError) {
+        return (
+        <div>
+            <h3>Set List</h3>
+            Please connect to a supported chain.
+            Supported chains: {supportedChainIds.map(getChainName).join(", ")}
+        </div>
+        )
     }
-    if (!setDetails) {
-        return <p>No set details</p>
+    if (isLoading) {
+        return (
+        <div>
+            <h3>Set List</h3>
+            <p>Loading...</p>
+        </div>
+        )
+    }
+    if (!setAttributes) {
+        return (
+        <div>
+            <h3>Set List</h3>
+            <p>No set attributes</p>
+        </div>
+        )
     }
 
     return (
         <div>
             <h3>Set List</h3>
             <div className={styles.grid}>
-                {setDetails.map(setDetail => <SetCard
+                {setAttributes.map(setDetail => <SetCard
                     name={setDetail.name}
                     symbol={setDetail.symbol}
                     positions={setDetail.positions}
