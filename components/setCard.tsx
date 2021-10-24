@@ -17,7 +17,7 @@ export const SetCard = (props: SetCardProps): JSX.Element => {
                 <p className={styles.symbol}>{props.symbol}</p>
             </div>
             Positions
-            {props.positions.map(position => <PositionComponent address={position.component} quantity={position.unit} />)}
+            {props.positions.map(position => <PositionComponent address={position.component} quantity={position.unit} key={position.component} />)}
         </div>
     )
 }

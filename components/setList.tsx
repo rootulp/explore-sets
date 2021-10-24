@@ -27,7 +27,7 @@ export const SetList = (): JSX.Element => {
         }
 
         fetchSetDetails()
-    }, [chainId, library])
+    }, [chainId, library, set])
 
     if (isLoading) {
         return <p>Loading...</p>
@@ -40,7 +40,7 @@ export const SetList = (): JSX.Element => {
         <div>
             <h3>Set List</h3>
             <div className={styles.grid}>
-                {setDetails.map(setDetail => <SetCard name={setDetail.name} symbol={setDetail.symbol} positions={setDetail.positions} />) }
+                {setDetails.map(setDetail => <SetCard name={setDetail.name} symbol={setDetail.symbol} positions={setDetail.positions} key={setDetail.name} />) }
             </div>
         </div>
     )
