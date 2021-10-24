@@ -1,0 +1,20 @@
+.navbar {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.navbar button {
+    padding: 1rem;
+    border: none;
+    color: #FFF;
+    font-size: 1rem;
+}
+
+.connectButton {
+    background: #0000FF;
+}
+
+.disconnectButton {
+    background: #808080;
+}
