@@ -24,11 +24,13 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 - [X] Add back other chains to chains.ts
 - [X] Display an error if on an unsupported chain
 
-## Extra credit
+Extra credit
+
 - [X] Style Navbar
 - [X] Improve loading states
 - [X] Extract Set initialization to a hook
 - [X] Answer questions in FAQ
+- [ ] Use `@web3-react/network-connector` to provide a default web3 provider when user hasn't connected wallet
 - [ ] Add ENS support
 - [ ] Make Coingecko API more robust. Getting throttled currently
 - [ ] Sort positions based on most valuable in descending order

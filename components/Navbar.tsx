@@ -1,8 +1,9 @@
 import { getChainName, getExplorerAddressLink, shortenAddress } from "@usedapp/core"
-import { useWeb3React } from "@web3-react/core"
+import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core"
 import { injected } from "../lib/connector"
 import {Button, Container, Navbar as BootstrapNavbar} from "react-bootstrap";
 import React from "react";
+import { NoEthereumProviderError, UserRejectedRequestError } from "@web3-react/injected-connector";
 
 export const Navbar = (): JSX.Element => {
     const { active, account, chainId, activate, deactivate, error } = useWeb3React()
@@ -24,7 +25,7 @@ export const Navbar = (): JSX.Element => {
     }
 
     const errorText = error && (
-      <BootstrapNavbar.Text>{error}</BootstrapNavbar.Text>
+      <BootstrapNavbar.Text>{getErrorMessage(error)}</BootstrapNavbar.Text>
     )
 
     const signedInWithText = account && chainId && (
@@ -51,4 +52,17 @@ export const Navbar = (): JSX.Element => {
           </Container>
       </BootstrapNavbar>
     )
+}
+
+function getErrorMessage(error: Error) {
+  if (error instanceof NoEthereumProviderError) {
+    return 'No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.'
+  } else if (error instanceof UnsupportedChainIdError) {
+    return "You're connected to an unsupported network."
+  } else if (error instanceof UserRejectedRequestError) {
+    return 'Please authorize this website to access your Ethereum account.'
+  } else {
+    console.error(error)
+    return 'An unknown error occurred. Check the console for more details.'
+  }
 }
