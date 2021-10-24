@@ -1,4 +1,4 @@
-import { getExplorerAddressLink, ChainId } from "@usedapp/core";
+import { getExplorerAddressLink } from "@usedapp/core";
 import { useWeb3React } from "@web3-react/core";
 import { BigNumber, ethers } from "ethers";
 import { useCoingeckoToken } from "../lib/useCoingeckoToken";
