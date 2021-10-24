@@ -46,7 +46,12 @@ export const MAINNET_SET_ADDRESSES: SetAddresses = {
     streamingFee: "0x08f866c74205617B6F3903EF481798EcED10cDEC",
     tradeModule: "0x90F765F63E7DC5aE97d6c576BF693FB6AF41C129"
 }
-export function initializeSet(chainId: number, ethersProvider: Provider): Set {
+export function initializeSet(chainId?: number, ethersProvider?: Provider): Set | undefined {
+    if (ethersProvider === undefined) {
+        console.warn("Not initializing Set because a provider hasn't been provided")
+        return;
+    }
+
     if (chainId === 1) {
         return new Set({
             ethersProvider,

@@ -1,11 +1,10 @@
-import WalletConnectProvider from '@walletconnect/web3-provider'
-import { providers } from 'ethers'
 import Head from 'next/head'
-import { useCallback, useEffect, useReducer } from 'react'
-import Web3Modal from 'web3modal'
 import { ellipseAddress, getChainData } from '../lib/utilities'
-import {SetList} from "../lib/setList"
+import {SetList} from "../components/setList"
 import styles from "../styles/Home.module.css"
+import { injected } from "../lib/connector";
+import { useWeb3React } from "@web3-react/core";
+import { getChainName } from "@usedapp/core";
 
 
 const infuraToken = process.env.INFURA_TOKEN;
@@ -14,165 +13,24 @@ console.log("infuraToken", infuraToken);
 const alchemyToken = process.env.ALCHEMY_KOVAN_TOKEN;
 console.log("alchemyToken", alchemyToken);
 
-const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider,
-    options: {
-      // TODO(@rootulp): this HACKHACK WalletConnect isn't working b/c it claims
-      // this environment variable isn't provided
-      infuraId: process.env.INFURA_TOKEN,
-    },
-  },
-}
-
-let web3Modal: Web3Modal
-if (typeof window !== 'undefined') {
-  web3Modal = new Web3Modal({
-    network: 'mainnet', // optional
-    cacheProvider: true,
-    providerOptions, // required
-  })
-}
-
-type StateType = {
-  provider?: any
-  web3Provider?: providers.Web3Provider
-  address?: string
-  chainId?: number
-}
-
-type ActionType =
-  | {
-      type: 'SET_WEB3_PROVIDER'
-      provider?: StateType['provider']
-      web3Provider?: StateType['web3Provider']
-      address?: StateType['address']
-      chainId?: StateType['chainId']
-    }
-  | {
-      type: 'SET_ADDRESS'
-      address?: StateType['address']
-    }
-  | {
-      type: 'RESET_WEB3_PROVIDER'
-    }
-
-const initialState: StateType = {
-  provider: undefined,
-  web3Provider: undefined,
-  address: undefined,
-  chainId: undefined,
-}
-
-
-function reducer(state: StateType, action: ActionType): StateType {
-  switch (action.type) {
-    case 'SET_WEB3_PROVIDER':
-      return {
-        ...state,
-        provider: action.provider,
-        web3Provider: action.web3Provider,
-        address: action.address,
-        chainId: action.chainId,
-      }
-    case 'SET_ADDRESS':
-      return {
-        ...state,
-        address: action.address,
-      }
-    case 'RESET_WEB3_PROVIDER':
-      return initialState
-    default:
-      throw new Error()
-  }
-}
-
 export const Home = (): JSX.Element => {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const { provider, web3Provider, address, chainId } = state
+  const { active, account, chainId, activate, deactivate } = useWeb3React()
 
-  const connect = useCallback(async function () {
-    // This is the initial `provider` that is returned when
-    // using web3Modal to connect. Can be MetaMask or WalletConnect.
-    const provider = await web3Modal.connect()
-
-    // We plug the initial `provider` into ethers.js and get back
-    // a Web3Provider. This will add on methods from ethers.js and
-    // event listeners such as `.on()` will be different.
-    const web3Provider = new providers.Web3Provider(provider)
-
-    const network = await web3Provider.getNetwork()
-    const signer = web3Provider.getSigner()
-    const address = await signer.getAddress()
-
-    dispatch({
-      type: 'SET_WEB3_PROVIDER',
-      provider,
-      web3Provider,
-      address,
-      chainId: network.chainId,
-    })
-  }, [])
-
-  const disconnect = useCallback(
-    async function () {
-      await web3Modal.clearCachedProvider()
-      if (provider?.disconnect && typeof provider.disconnect === 'function') {
-        await provider.disconnect()
-      }
-      dispatch({
-        type: 'RESET_WEB3_PROVIDER',
-      })
-    },
-    [provider]
-  )
-
-  // Auto connect to the cached provider
-  useEffect(() => {
-    if (web3Modal.cachedProvider) {
-      connect()
+  async function connect() {
+    try {
+      await activate(injected)
+    } catch (ex) {
+      console.log(ex)
     }
-  }, [connect])
+  }
 
-  // A `provider` should come with EIP-1193 events. We'll listen for those events
-  // here so that when a user switches accounts or networks, we can update the
-  // local React state with that new information.
-  useEffect(() => {
-    if (provider?.on) {
-      const handleAccountsChanged = (accounts: string[]) => {
-        console.log('accountsChanged', accounts)
-        dispatch({
-          type: 'SET_ADDRESS',
-          address: accounts[0],
-        })
-      }
-
-      // https://docs.ethers.io/v5/concepts/best-practices/#best-practices--network-changes
-      const handleChainChanged = (_hexChainId: string) => {
-        window.location.reload();
-      }
-
-      const handleDisconnect = (error: { code: number; message: string }) => {
-        console.log('disconnect', error)
-        disconnect()
-      }
-
-      provider.on('accountsChanged', handleAccountsChanged)
-      provider.on('chainChanged', handleChainChanged);
-      provider.on('disconnect', handleDisconnect)
-
-      // Subscription Cleanup
-      return () => {
-        if (provider.removeListener) {
-          provider.removeListener('accountsChanged', handleAccountsChanged)
-          provider.removeListener('chainChanged', handleChainChanged)
-          provider.removeListener('disconnect', handleDisconnect)
-        }
-      }
+  async function disconnect() {
+    try {
+      deactivate()
+    } catch (ex) {
+      console.log(ex)
     }
-  }, [provider, disconnect])
-
-  const chainData = getChainData(chainId)
+  }
 
   return (
     <div className="container">
@@ -184,11 +42,11 @@ export const Home = (): JSX.Element => {
       <header>
         <div className={styles.navbar}>
           <div>
-            <div>Network: {chainData?.name}</div>
-            <div>Address: {ellipseAddress(address)}</div>
+            <div>Network: {chainId && getChainName(chainId)}</div>
+            <div>Address: {account && ellipseAddress(account)}</div>
           </div>
           <div>
-            {web3Provider ? (
+            {active ? (
               <button className="button" type="button" onClick={disconnect}>
                 Disconnect
               </button>
@@ -201,7 +59,7 @@ export const Home = (): JSX.Element => {
         </div>
       </header>
 
-    {chainId && web3Provider && <SetList chainId={chainId} provider={web3Provider} />}
+    <SetList />
 
       <style jsx>{`
         main {
@@ -217,7 +75,7 @@ export const Home = (): JSX.Element => {
 
         .button {
           padding: 1rem;
-          background: ${web3Provider ? 'grey' : 'blue'};
+          background: ${active ? 'grey' : 'blue'};
           border: none;
           color: #fff;
           font-size: 1rem;

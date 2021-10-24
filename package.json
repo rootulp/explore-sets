@@ -11,15 +11,14 @@
   "dependencies": {
     "@types/coingecko-api": "^1.0.2",
     "@usedapp/core": "^0.5.4",
-    "@walletconnect/web3-provider": "^1.6.5",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
     "ethers": "5.4.6",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "set.js": "^0.3.2",
-    "swr": "^1.0.1",
-    "walletlink": "^2.1.11",
-    "web3modal": "^1.9.4"
+    "swr": "^1.0.1"
   },
   "devDependencies": {
     "@types/react": "17.0.31",
