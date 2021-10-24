@@ -29,6 +29,8 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 - [X] Improve loading states
 - [ ] Figure out why ENS lookup doesn't work
 - [ ] Make Coingecko API more robust. Getting throttled currently
+- [ ] Sort positions based on most valuable in descending order
+- [ ] Visually differentiate
 - [ ] Add tests
 - [ ] Answer questions in PDF
 - [ ] Reduce the precision of position values

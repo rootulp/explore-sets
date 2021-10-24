@@ -60,7 +60,7 @@ export const SetList = (): JSX.Element => {
         <div className={styles.setList}>
             <h3>Set List</h3>
             <div className={styles.grid}>
-                {range(NUMBER_OF_SETS_TO_FETCH).map(i => <LoadingSetCard />)}
+                {range(NUMBER_OF_SETS_TO_FETCH).map(i => <LoadingSetCard key={i} index={i} />)}
             </div>
         </div>
         )
