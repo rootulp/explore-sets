@@ -4,7 +4,7 @@
 
 A small app to explore sets. Inspired by [tokensets.com/explore](https://www.tokensets.com/explore), [web3modal-example](https://github.com/ChangoMan/web3modal-example).
 
-Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/), [web3-react](https://github.com/NoahZinsmeister/web3-react).
+Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/), [web3-react](https://github.com/NoahZinsmeister/web3-react), [useDapp](https://usedapp.readthedocs.io/en/latest/), [coingecko API](https://www.coingecko.com/api/documentations/v3).
 
 ## Local Development
 1. Clone this repo
@@ -25,16 +25,17 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 - [X] Display an error if on an unsupported chain
 
 ## Extra credit
+- [ ] Add tests
+- [ ] Answer questions in PDF
 - [ ] Style Navbar
 - [ ] Reduce the precision of position values
 - [ ] Improve loading states
 - [ ] Add ESLint
 - [ ] Move Set to a context
-- [ ] Add tests
-- [ ] Answer questions
 - [ ] Set detail page. Possible URL path `/set/[:symbol]`
 - [ ] List streaming fee on Set detail page
 - [ ] Surface price of Set token using CoinGecko API. Consider using [useDapp.useCoingeckoPrice](https://usedapp.readthedocs.io/en/latest/coingecko.html#hooks)
+- [ ] Fix https://github.com/rootulp/explore-sets/issues/1
 
 ## Contribute
 
