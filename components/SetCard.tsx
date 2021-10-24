@@ -1,7 +1,8 @@
 import React from "react"
+import { Card, ListGroup } from "react-bootstrap"
 import { Position } from "set.js/dist/types/src/types"
-import styles from "../styles/SetCard.module.css"
 import {Position as PositionComponent} from "./Position"
+import styles from "../styles/SetCard.module.css"
 
 interface SetCardProps {
     name: string,
@@ -11,13 +12,14 @@ interface SetCardProps {
 
 export const SetCard = (props: SetCardProps): JSX.Element => {
     return (
-        <div key={props.symbol} className={styles.card}>
-            <div className={styles.cardHeader}>
-                <p>{props.name}</p>
-                <p>{props.symbol}</p>
-            </div>
-            Positions
-            {props.positions.map(position => <PositionComponent address={position.component} quantity={position.unit} key={position.component} />)}
-        </div>
+        <Card className={styles.card}>
+            <Card.Body>
+                <Card.Title>{props.name}</Card.Title>
+                <Card.Subtitle>{props.symbol}</Card.Subtitle>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+                {props.positions.map(position => <PositionComponent address={position.component} quantity={position.unit} key={position.component} />)}
+            </ListGroup>
+        </Card>
     )
 }

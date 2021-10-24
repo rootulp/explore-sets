@@ -1,6 +1,8 @@
 import { getExplorerAddressLink } from "@usedapp/core";
 import { useWeb3React } from "@web3-react/core";
 import { BigNumber, ethers } from "ethers";
+import React from "react";
+import { ListGroupItem } from "react-bootstrap";
 import { useCoingeckoToken } from "../lib/useCoingeckoToken";
 
 interface PositionProps {
@@ -13,14 +15,14 @@ export const Position = (props: PositionProps): JSX.Element => {
     const { token, isLoading, isError } = useCoingeckoToken(props.address, chainId);
 
     if (isLoading){
-        return (<div key={props.address}>Loading</div>)
+        return (<ListGroupItem key={props.address}>Loading</ListGroupItem>)
     }
     if (isError){
-        return (<div key={props.address}>Error</div>)
+        return ( <ListGroupItem key={props.address}>Error</ListGroupItem>)
     }
     return (
-        <div key={props.address}>
+        <ListGroupItem key={props.address}>
             {chainId && <a href={getExplorerAddressLink(props.address, chainId)}>{token.name}</a>}: {ethers.utils.commify(ethers.utils.formatEther(props.quantity))}
-        </div>
+        </ListGroupItem>
     )
 }
