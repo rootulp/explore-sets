@@ -1,8 +1,7 @@
-import { CoinGeckoTokenData } from "set.js/dist/types/src/types";
 import useSWR from "swr"
 
 interface CoingeckoToken {
-    token: CoinGeckoTokenData
+    token: any // I couldn't find CoinGecko types for this
     isLoading: boolean
     isError: boolean
 }
@@ -13,7 +12,7 @@ export function useCoingeckoToken(address: string, chainId?: number): CoingeckoT
     const {data, error} = useSWR(`https://api.coingecko.com/api/v3/coins/${assetPlatform}/contract/${address}`, fetcher)
 
     return {
-        token: data as CoinGeckoTokenData,
+        token: data,
         isLoading: !error && !data,
         isError: error
     }

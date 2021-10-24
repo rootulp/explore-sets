@@ -71,6 +71,7 @@ export const SetList = (): JSX.Element => {
             <h3>Set List</h3>
             <div className={styles.grid}>
                 {setAttributes && setAttributes.map(setDetail => <SetCard
+                    address={setDetail.tokenAddress}
                     name={setDetail.name}
                     symbol={setDetail.symbol}
                     positions={setDetail.positions}

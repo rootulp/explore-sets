@@ -3,16 +3,31 @@ import { Card, ListGroup, Placeholder } from "react-bootstrap"
 import { Position } from "set.js/dist/types/src/types"
 import {Position as PositionComponent} from "./Position"
 import styles from "../styles/SetCard.module.css"
+import { useCoingeckoToken } from "../lib/useCoingeckoToken"
+import { useWeb3React } from "@web3-react/core"
 
 interface SetCardProps {
+    address: string,
     name: string,
     symbol: string,
     positions: Position[],
 }
 
 export const SetCard = (props: SetCardProps): JSX.Element => {
+    const {chainId} = useWeb3React();
+    const { token, isLoading, isError } = useCoingeckoToken(props.address, chainId);
+
+    if (isLoading) {
+        return LoadingSetCard()
+    }
+
+    if (isError) {
+        return <React.Fragment/>
+    }
+
     return (
         <Card className={styles.card}>
+            {token?.image?.large && <Card.Img variant="top" src={token.image.small} />}
             <Card.Body>
                 <Card.Title>{props.name}</Card.Title>
                 <Card.Subtitle>{props.symbol}</Card.Subtitle>
@@ -24,9 +39,12 @@ export const SetCard = (props: SetCardProps): JSX.Element => {
     )
 }
 
-export const LoadingSetCard = (): JSX.Element => {
+interface LoadingSetCardProps {
+    index: number
+}
+export const LoadingSetCard = (props: LoadingSetCardProps): JSX.Element => {
     return (
-        <Card className={styles.card}>
+        <Card className={styles.card} key={index}>
             <Card.Body>
                 <Placeholder as={Card.Title} animation="glow">
                     <Placeholder xs={6} />
