@@ -2,53 +2,21 @@
 
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://rootulp.mit-license.org)
 
-A small app to explore sets. Inspired by [tokensets.com/explore](https://www.tokensets.com/explore), [web3modal-example](https://github.com/ChangoMan/web3modal-example).
+A small app to explore sets. Inspired by [tokensets.com/explore](https://www.tokensets.com/explore).
 
-Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/), [web3-react](https://github.com/NoahZinsmeister/web3-react), [useDapp](https://usedapp.readthedocs.io/en/latest/), [coingecko API](https://www.coingecko.com/api/documentations/v3).
+Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/), [web3-react](https://github.com/NoahZinsmeister/web3-react), [useDapp](https://usedapp.readthedocs.io/en/latest/), and [coingecko API](https://www.coingecko.com/api/documentations/v3).
 
 ## Local Development
 1. Clone this repo
 1. Copy default environment variables file: `cp .env.default .env.local`
 1. Create Alchemy tokens for **Mainnet** and **Kovan**
     1. Navigate to [Alchemy](https://www.alchemy.com/) and create an account
-    1. Click **Create app** and provide a name (e.g. **explore-sets-kovan**)
+    1. Click **Create app** and provide a name (e.g. **explore-sets-mainnet**)
     1. Navigate to your new app and click **View key** then copy the API key URL
     1. Repeat these steps to generate a Kovan token
     1. Populate the fields in `.env.local`
 1. Start the app in dev mode with `yarn dev`
 1. Open [http://localhost:3000](http://localhost:3000)
-
-## To-do
-
-- [X] Create Next.js app
-- [X] Convert it to TypeScript
-- [X] Set up an Alchemy project
-- [X] Configure an Ethers provider
-- [X] Create a page for all Set cards. Possible URL path `/sets`
-- [X] Read basic Set info from Set.js
-- [X] Populate cards
-- [X] Style cards in a 3 x 1 grid
-- [X] Add back other chains to chains.ts
-- [X] Display an error if on an unsupported chain
-
-Extra credit
-
-- [X] Style Navbar
-- [X] Improve loading states
-- [X] Extract Set initialization to a hook
-- [X] Answer questions in FAQ
-- [X] Use `@web3-react/network-connector` to provide a default web3 provider when user hasn't connected wallet
-- [ ] Add ENS support
-- [ ] Make Coingecko API more robust. Getting throttled currently
-- [ ] Sort positions based on most valuable in descending order
-- [ ] Visually differentiate different cards
-- [ ] Add tests
-- [ ] Reduce the precision of position values
-- [ ] Add ESLint
-- [ ] Set detail page. Possible URL path `/set/[:symbol]`
-- [ ] List streaming fee on Set detail page
-- [ ] Surface price of Set token using CoinGecko API. Consider using [useDapp.useCoingeckoPrice](https://usedapp.readthedocs.io/en/latest/coingecko.html#hooks)
-- [ ] Fix https://github.com/rootulp/explore-sets/issues/1
 
 ## Contribute
 
