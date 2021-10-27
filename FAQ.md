@@ -28,13 +28,12 @@ Sort-of. Still a little manual. We can improve this process by getting a list of
 
 > Under what conditions does your solution break?
 
-- Kovan until I find the `ProtocolViewer` contract address deployed to Kovan
 - Unsupported chains
 - For Sets that contain a position where the position address isn't on CoinGecko
 
 > Will the UI remain responsive, as the number of Sets increases?
 
-I capped the number of Sets to the first 10 in order to avoid making tons of CoinGecko requests for positions that aren't on the page. In order to make the UI more responsive, we could consider server side requesting. This is blocked on https://github.com/rootulp/explore-sets/issues/1
+I capped the number of Sets to the first 6 in order to avoid making tons of CoinGecko requests for positions that aren't on the page. In order to make the UI more responsive, we could consider server side requesting. This is blocked on https://github.com/rootulp/explore-sets/issues/1
 
 > How do you handle the eventually consistent nature of web3 calls?
 
@@ -48,7 +47,7 @@ Since the Web3 calls we're making are read-only, we show loading cards while the
 
 > What general UX/UI challenges do you foresee?
 
-- I showed this page to my Mom who thinks it's difficult to differentiate between Set cards. Color and images could help to visually differentiate Sets.
+- The current cards are visually too similar. It would be nice to add images for tokens to visually differentiate Sets.
 - We can reduce the precision on the number of decimal places to show for Position quantities
 - New users may find Ethereum addresses difficult to view. We should integrate with ENS ASAP.
 - I'd like to show a network logo next to Mainnet in the header (similar to Uniswap)
