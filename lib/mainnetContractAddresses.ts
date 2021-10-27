@@ -1,0 +1,8 @@
+export const dpiTokenAddress="0x1494CA1F11D487c2bBe4543E90080AeBa4BA3C2b"
+export const mviTokenAddress="0x72e364F2ABdC788b7E918bc238B21f109Cd634D7"
+export const eth2xfliTokenAddress="0xAa6E8127831c9DE45ae56bB1b0d4D4Da6e5665BD"
+export const btc2xfliTokenAddress="0x0B498ff89709d3838a063f1dFA463091F9801c2b"
+export const bedTokenAddress="0x2aF1dF3AB0ab157e1E2Ad8F88A7D04fbea0c7dc6"
+export const dataTokenAddress="0x33d63Ba1E57E54779F7dDAeaA7109349344cf5F1"
+
+export const mainnetTokenAddresses = [dpiTokenAddress, mviTokenAddress, eth2xfliTokenAddress, btc2xfliTokenAddress, bedTokenAddress, dataTokenAddress]
