@@ -4,6 +4,7 @@ import { BigNumber, ethers } from "ethers";
 import React from "react";
 import { ListGroupItem } from "react-bootstrap";
 import { useCoingeckoToken } from "../lib/useCoingeckoToken";
+import styles from "../styles/Position.module.css"
 
 interface PositionProps {
     address: string
@@ -21,8 +22,9 @@ export const Position = (props: PositionProps): JSX.Element => {
         return ( <ListGroupItem key={props.address}>Error</ListGroupItem>)
     }
     return (
-        <ListGroupItem key={props.address}>
-            {token.name}: {ethers.utils.commify(ethers.utils.formatEther(props.quantity))}
+        <ListGroupItem key={props.address} className={styles.row}>
+            <div>{token.symbol.toUpperCase()}</div>
+            <div>{ethers.utils.commify(ethers.utils.formatEther(props.quantity))}</div>
         </ListGroupItem>
     )
 }
