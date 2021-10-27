@@ -20,10 +20,8 @@ export const KOVAN_SET_ADDRESSES: SetAddresses = {
     // https://docs.tokensets.com/contracts/deployed/protocol it is listed as
     // PriceOracle. Resolve the discrepancy so future devs aren't confused.
     masterOracle: "0xDFEA02F2824Ee177733d6f108005E95C85D1D4bE",
-    navIssuance: "https://kovan.etherscan.io/address/0x5dB52450a8C0eb5e0B777D4e08d7A93dA5a9c848",
-    // protocolViewer doesn't exist on https://docs.tokensets.com/contracts/deployed/protocol
-    // Kovan won't work until this field is populated
-    protocolViewer: "",
+    navIssuance: "0x5dB52450a8C0eb5e0B777D4e08d7A93dA5a9c848",
+    protocolViewer: "0xbbC86C6099B148383941e8E592847fDC61a03283",
     setTokenCreator: "0xB24F7367ee8efcB5EAbe4491B42fA222EC68d411",
     streamingFee: "0xE038E59DEEC8657d105B6a3Fb5040b3a6189Dd51",
     tradeModule: "0xC93c8CDE0eDf4963ea1eea156099B285A945210a"
