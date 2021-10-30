@@ -1,0 +1,9 @@
+.tokenSymbol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.symbol {
+    margin-left: 5px;
+}

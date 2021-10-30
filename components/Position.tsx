@@ -1,11 +1,9 @@
-import { shortenAddress } from "@usedapp/core";
-import Image from "next/image";
-import { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 import React from "react";
 import { ListGroupItem } from "react-bootstrap";
-import useSWR from "swr";
-import { Token, TokenListsResponse, TOKEN_LISTS_API } from "../lib/tokenLists";
-import styles from "../styles/Position.module.css"
+import { Token} from "../lib/tokenLists";
+import { TokenSymbol } from "./TokenSymbol";
+import styles from "../styles/Position.module.css";
 
 interface PositionProps {
     address: string
@@ -23,20 +21,4 @@ export const Position = (props: PositionProps): JSX.Element => {
             <div>{ethers.utils.commify(ethers.utils.formatEther(quantity)).substring(0, 8)}</div>
         </ListGroupItem>
     )
-}
-
-interface TokenSymbolProps {
-    address: string
-    token?: Token
-}
-export const TokenSymbol = (props: TokenSymbolProps): JSX.Element => {
-    const {address, token} = props;
-
-    if (token) {
-        return <div className={styles.tokenSymbol}>
-            <Image src={token.logoURI} width={20} height={20}/>
-            <div className={styles.symbol}>{token.symbol}</div>
-        </div>
-    }
-    return <div className={styles.tokenSymbol}>{shortenAddress(address)}</div>
 }
