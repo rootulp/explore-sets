@@ -1,8 +1,7 @@
 import { shortenAddress } from "@usedapp/core";
-import { useWeb3React } from "@web3-react/core";
 import { BigNumber, ethers } from "ethers";
 import React from "react";
-import { ListGroupItem, Placeholder } from "react-bootstrap";
+import { ListGroupItem } from "react-bootstrap";
 import useSWR from "swr";
 import { Token, TokenListsResponse, TOKEN_LISTS_API } from "../lib/tokenLists";
 import styles from "../styles/Position.module.css"
@@ -20,7 +19,7 @@ export const Position = (props: PositionProps): JSX.Element => {
     return (
         <ListGroupItem key={address} className={styles.row}>
             <TokenSymbol address={address} token={token} />
-            <div>{ethers.utils.commify(ethers.utils.formatEther(quantity))}</div>
+            <div>{ethers.utils.commify(ethers.utils.formatEther(quantity)).substring(0, 8)}</div>
         </ListGroupItem>
     )
 }
