@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { SetDetails } from "set.js/dist/types/src/types"
 import { LoadingSetCard, SetCard } from "./SetCard"
-import { getModuleAddresses } from "../lib/setJsApi"
+import { getModuleAddresses } from "../lib/mainnetSetAddresses"
 import styles from "../styles/SetList.module.css"
 import { useWeb3React } from "@web3-react/core"
 import { range, uniq } from "lodash-es";
