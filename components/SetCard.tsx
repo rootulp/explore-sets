@@ -3,9 +3,9 @@ import { Button, ButtonGroup, Card, ListGroup, ListGroupItem, Placeholder } from
 import { Position } from "set.js/dist/types/src/types"
 import {Position as PositionComponent} from "./Position"
 import styles from "../styles/SetCard.module.css"
-import { propTypes } from "react-bootstrap/esm/Image"
 import { getExplorerAddressLink } from "@usedapp/core"
 import { useWeb3React } from "@web3-react/core"
+import {Token} from "../lib/tokenLists"
 
 const NUMBER_OF_POSITIONS_TO_DISPLAY = 3;
 interface SetCardProps {
@@ -13,29 +13,31 @@ interface SetCardProps {
     name: string,
     symbol: string,
     positions: Position[],
+    tokens: Token[],
 }
 
 
 
 export const SetCard = (props: SetCardProps): JSX.Element => {
+    const {address, name, symbol, positions, tokens} = props;
     const {chainId} = useWeb3React();
 
-    const moreText = NUMBER_OF_POSITIONS_TO_DISPLAY < props.positions.length && (
-        <ListGroupItem key={props.address}>{props.positions.length - NUMBER_OF_POSITIONS_TO_DISPLAY} more...</ListGroupItem>
+    const moreText = NUMBER_OF_POSITIONS_TO_DISPLAY < positions.length && (
+        <ListGroupItem key={address}>{positions.length - NUMBER_OF_POSITIONS_TO_DISPLAY} more...</ListGroupItem>
     )
 
     return (
         <Card className={styles.card}>
             <Card.Body>
-                <Card.Title>{props.name}</Card.Title>
-                <Card.Subtitle>{props.symbol}</Card.Subtitle>
+                <Card.Title>{name}</Card.Title>
+                <Card.Subtitle>{symbol}</Card.Subtitle>
                 <ButtonGroup size="sm">
-                    <Button variant="link" href={getTokenSetsUrl(props.symbol)}>TokenSets</Button>
-                    {chainId && <Button variant="link" href={getExplorerAddressLink(props.address, chainId)}>Etherscan</Button>}
+                    <Button variant="link" href={getTokenSetsUrl(symbol)}>TokenSets</Button>
+                    {chainId && <Button variant="link" href={getExplorerAddressLink(address, chainId)}>Etherscan</Button>}
                 </ButtonGroup>
             </Card.Body>
             <ListGroup className="list-group-flush">
-                {props.positions.slice(0, NUMBER_OF_POSITIONS_TO_DISPLAY).map(position => <PositionComponent address={position.component} quantity={position.unit} key={position.component} />)}
+                {positions.slice(0, NUMBER_OF_POSITIONS_TO_DISPLAY).map(position => <PositionComponent address={position.component} quantity={position.unit} key={position.component} tokens={tokens}/>)}
                 {moreText}
             </ListGroup>
         </Card>

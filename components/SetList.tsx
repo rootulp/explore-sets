@@ -11,6 +11,7 @@ import { supportedChainIds } from "../lib/connector"
 import { useSet } from "../lib/useSet"
 import { mainnetTokenAddresses } from "../lib/mainnetContractAddresses"
 import Set from "set.js";
+import { Token } from "../lib/tokenLists"
 
 const NUMBER_OF_SETS_TO_FETCH = 6;
 
@@ -18,7 +19,12 @@ interface SetAttribute extends Pick<SetDetails, "name" | "symbol" | "positions">
     tokenAddress: string;
 }
 
-export const SetList = (): JSX.Element => {
+interface SetListProps {
+    tokens: Token[]
+}
+
+export const SetList = (props: SetListProps): JSX.Element => {
+    const {tokens} = props;
     const { chainId, library, error } = useWeb3React()
     const [setAttributes, setSetAttributes] = useState<SetAttribute[]>()
     const [isLoading, setIsLoading] = useState(false)
@@ -76,6 +82,7 @@ export const SetList = (): JSX.Element => {
                     positions={setDetail.positions}
                     // Use the tokenAddress as the key because ppl have created multiple sets with the same symbol and name
                     key={setDetail.tokenAddress}
+                    tokens={tokens}
                 />)}
             </div>
         </div>
