@@ -9,7 +9,7 @@ import { UnsupportedChainIdError } from '@web3-react/core'
 import { getChainName } from "@usedapp/core"
 import { supportedChainIds } from "../lib/connector"
 import { useSet } from "../lib/useSet"
-import { dpiTokenAddress, mviTokenAddress, eth2xfliTokenAddress, btc2xfliTokenAddress, bedTokenAddress, dataTokenAddress, mainnetTokenAddresses } from "../lib/mainnetContractAddresses"
+import { mainnetTokenAddresses } from "../lib/mainnetContractAddresses"
 import Set from "set.js";
 
 const NUMBER_OF_SETS_TO_FETCH = 6;
@@ -51,7 +51,6 @@ export const SetList = (): JSX.Element => {
     if (isUnsupportedChainIdError) {
         return (
         <div className={styles.setList}>
-            <h3>Set List</h3>
             Please connect to a supported chain.
             Supported chains: {supportedChainIds.map(getChainName).join(", ")}
         </div>
@@ -60,7 +59,6 @@ export const SetList = (): JSX.Element => {
     if (isLoading) {
         return (
         <div className={styles.setList}>
-            <h3>Set List</h3>
             <div className={styles.grid}>
                 {range(NUMBER_OF_SETS_TO_FETCH).map(i => <LoadingSetCard key={i} index={i} />)}
             </div>
@@ -70,7 +68,6 @@ export const SetList = (): JSX.Element => {
 
     return (
         <div className={styles.setList}>
-            <h3>Set List</h3>
             <div className={styles.grid}>
                 {setAttributes && setAttributes.map(setDetail => <SetCard
                     address={setDetail.tokenAddress}
