@@ -21,3 +21,7 @@ export interface Token {
     name: string
     symbol: string
 }
+
+export function getToken(tokens: Token[], address: string): Token | undefined {
+    return tokens.filter(t => t.address === address)[0]
+}

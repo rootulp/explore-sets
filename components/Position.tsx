@@ -1,7 +1,7 @@
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import React from "react";
 import { ListGroupItem } from "react-bootstrap";
-import { Token} from "../lib/tokenLists";
+import { getToken, Token} from "../lib/tokenLists";
 import { TokenSymbol } from "./TokenSymbol";
 import styles from "../styles/Position.module.css";
 
@@ -13,11 +13,10 @@ interface PositionProps {
 
 export const Position = (props: PositionProps): JSX.Element => {
     const {address, quantity, tokens} = props;
-    const token = tokens?.filter(t => t.address === props.address)[0]
 
     return (
         <ListGroupItem key={address} className={styles.row}>
-            <TokenSymbol address={address} token={token} />
+            <TokenSymbol address={address} token={getToken(tokens, address)} />
             <div>{ethers.utils.commify(ethers.utils.formatEther(quantity)).substring(0, 8)}</div>
         </ListGroupItem>
     )

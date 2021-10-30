@@ -5,7 +5,8 @@ import {Position as PositionComponent} from "./Position"
 import styles from "../styles/SetCard.module.css"
 import { getExplorerAddressLink } from "@usedapp/core"
 import { useWeb3React } from "@web3-react/core"
-import {Token} from "../lib/tokenLists"
+import {getToken, Token} from "../lib/tokenLists"
+import { TokenSymbol } from "./TokenSymbol"
 
 const NUMBER_OF_POSITIONS_TO_DISPLAY = 3;
 interface SetCardProps {
@@ -29,8 +30,8 @@ export const SetCard = (props: SetCardProps): JSX.Element => {
     return (
         <Card className={styles.card}>
             <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <Card.Subtitle>{symbol}</Card.Subtitle>
+                <Card.Title><TokenSymbol token={getToken(tokens, address)} address={address}/></Card.Title>
+                <Card.Subtitle>{name}</Card.Subtitle>
                 <ButtonGroup size="sm">
                     <Button variant="link" href={getTokenSetsUrl(symbol)}>TokenSets</Button>
                     {chainId && <Button variant="link" href={getExplorerAddressLink(address, chainId)}>Etherscan</Button>}
