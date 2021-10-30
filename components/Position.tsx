@@ -1,4 +1,5 @@
 import { shortenAddress } from "@usedapp/core";
+import Image from "next/image";
 import { BigNumber, ethers } from "ethers";
 import React from "react";
 import { ListGroupItem } from "react-bootstrap";
@@ -32,9 +33,12 @@ export const TokenSymbol = (props: TokenSymbolProps): JSX.Element => {
     const {address, token} = props;
 
     if (token) {
-        return <div>{token.symbol}</div>
+        return <div className={styles.tokenSymbol}>
+            <Image src={token.logoURI} width={20} height={20}/>
+            <div className={styles.symbol}>{token.symbol}</div>
+        </div>
     }
-    return <div>{shortenAddress(address)}</div>
+    return <div className={styles.tokenSymbol}>{shortenAddress(address)}</div>
 }
 
 async function fetcher (url: string): Promise<Token[]> {
