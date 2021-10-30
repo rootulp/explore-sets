@@ -1,19 +1,12 @@
 import { getChainName, getExplorerAddressLink, shortenAddress } from "@usedapp/core"
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core"
-import { injectedConnector, networkConnector } from "../lib/connector"
+import { injectedConnector } from "../lib/connector"
 import {Button, Container, Navbar as BootstrapNavbar} from "react-bootstrap";
-import React, { useEffect } from "react";
+import React from "react";
 import { NoEthereumProviderError, UserRejectedRequestError } from "@web3-react/injected-connector";
-import { DefaultProviderName } from "../lib/constants";
 
 export const Navbar = (): JSX.Element => {
-    const { activate: activateDefaultProvider } = useWeb3React(DefaultProviderName)
     const { active, account, chainId, activate, deactivate, error } = useWeb3React()
-
-    useEffect(() => {
-      console.log("Activating default provider")
-      activateDefaultProvider(networkConnector)
-    },[networkConnector])
 
     async function connect() {
         try {

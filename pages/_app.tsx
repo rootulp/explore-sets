@@ -5,22 +5,15 @@ import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
 import { providers } from "ethers"
 import dynamic from 'next/dynamic'
 
-function getLibrary(provider?: any, connector?: any) {
+function getLibrary(provider?: any) {
   return new providers.Web3Provider(provider)
 }
 
-const Web3ReactProviderDefault = dynamic(
-  () => import('../components/DefaultProvider'),
-  { ssr: false }
-)
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Web3ReactProviderDefault getLibrary={getLibrary}>
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <Component {...pageProps} />
-      </Web3ReactProvider>
-    </Web3ReactProviderDefault>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Component {...pageProps} />
+    </Web3ReactProvider>
   )
 }
 export default MyApp

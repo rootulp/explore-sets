@@ -8,13 +8,6 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 
 ## Local Development
 1. Clone this repo
-1. Copy default environment variables file: `cp .env.default .env.local`
-1. Create Alchemy tokens for **Mainnet** and **Kovan**
-    1. Navigate to [Alchemy](https://www.alchemy.com/) and create an account
-    1. Click **Create app** and provide a name (e.g. **explore-sets-mainnet**)
-    1. Navigate to your new app and click **View key** then copy the API key URL
-    1. Repeat these steps to generate a Kovan token
-    1. Populate the fields in `.env.local`
 1. Start the app in dev mode with `yarn dev`
 1. Open [http://localhost:3000](http://localhost:3000)
 
