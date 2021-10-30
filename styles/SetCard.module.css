@@ -1,4 +1,5 @@
 .card {
   margin: 1rem;
   width: 30%;
+  min-width: 185px;
 }
