@@ -13,16 +13,29 @@ interface PositionProps {
 }
 
 export const Position = (props: PositionProps): JSX.Element => {
-    const { data, error } = useSWR(TOKEN_LISTS_API, fetcher)
+    const {address, quantity} = props;
+    const { data } = useSWR(TOKEN_LISTS_API, fetcher)
     const token = data?.filter(t => t.address === props.address)[0]
-    console.log(token)
 
     return (
-        <ListGroupItem key={props.address} className={styles.row}>
-            <div>{error ? "Error" : token === undefined ? <Placeholder xs={6} animation="glow" />: token.symbol}</div>
-            <div>{ethers.utils.commify(ethers.utils.formatEther(props.quantity))}</div>
+        <ListGroupItem key={address} className={styles.row}>
+            <TokenSymbol address={address} token={token} />
+            <div>{ethers.utils.commify(ethers.utils.formatEther(quantity))}</div>
         </ListGroupItem>
     )
+}
+
+interface TokenSymbolProps {
+    address: string
+    token?: Token
+}
+export const TokenSymbol = (props: TokenSymbolProps): JSX.Element => {
+    const {address, token} = props;
+
+    if (token) {
+        return <div>{token.symbol}</div>
+    }
+    return <div>{shortenAddress(address)}</div>
 }
 
 async function fetcher (url: string): Promise<Token[]> {
