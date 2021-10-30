@@ -4,7 +4,7 @@
 
 A small app to explore sets. Inspired by [tokensets.com/explore](https://www.tokensets.com/explore).
 
-Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/), [web3-react](https://github.com/NoahZinsmeister/web3-react), [useDapp](https://usedapp.readthedocs.io/en/latest/), and [coingecko API](https://www.coingecko.com/api/documentations/v3).
+Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/), [web3-react](https://github.com/NoahZinsmeister/web3-react), [useDapp](https://usedapp.readthedocs.io/en/latest/), and [tokenlists](https://tokenlists.org/).
 
 ## Local Development
 1. Clone this repo
@@ -13,7 +13,7 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 
 ## Contribute
 
-This project is under active development. I'd appreciate any feedback via [issues](https://github.com/rootulp/explore-sets/issues/new).
+I'd appreciate any feedback via [issues](https://github.com/rootulp/explore-sets/issues/new).
 
 ## License
 
