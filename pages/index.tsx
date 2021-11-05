@@ -4,7 +4,7 @@ import {SetList} from "../components/SetList"
 import React from "react";
 import { Navbar } from "../components/Navbar";
 import styles from "../styles/index.module.css"
-import { ONE_INCH_TOKEN_LIST as ONE_INCH_LIST, SET_TOKEN_LIST as SET_LIST, Token, TokenListsResponse, TOKEN_LISTS_API } from "../lib/tokenLists";
+import { ONE_INCH_LIST, SET_LIST, Token } from "../lib/tokenLists";
 
 interface HomeProps {
   errorCode: any;
