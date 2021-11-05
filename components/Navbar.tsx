@@ -1,11 +1,10 @@
-import { getChainName, getExplorerAddressLink, shortenAddress } from "@usedapp/core"
+import { getChainName, getExplorerAddressLink, shortenAddress, useEthers, useLookupAddress } from "@usedapp/core"
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core"
 import { injectedConnector } from "../lib/connector"
 import {Button, Container, Navbar as BootstrapNavbar} from "react-bootstrap";
 import React from "react";
 import { NoEthereumProviderError, UserRejectedRequestError } from "@web3-react/injected-connector";
 import { Web3Provider } from "@ethersproject/providers";
-import { useEnsName } from "../lib/useEnsName";
 
 export const Navbar = (): JSX.Element => {
     const { active, account, chainId, activate, deactivate, error } = useWeb3React()
@@ -53,9 +52,8 @@ export const Navbar = (): JSX.Element => {
 
 export const AccountName = (): JSX.Element => {
     const { account, chainId } = useWeb3React()
-    const { ensName } = useEnsName();
+    const ensName = useLookupAddress();
 
-    console.log(ensName)
     const signedInWithText = account && chainId && (
       <BootstrapNavbar.Text>
         Signed in with: <a href={getExplorerAddressLink(account, chainId)}>{ensName ? ensName : shortenAddress(account)}</a> on {getChainName(chainId)}
