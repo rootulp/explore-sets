@@ -4,6 +4,8 @@ import { injectedConnector } from "../lib/connector"
 import {Button, Container, Navbar as BootstrapNavbar} from "react-bootstrap";
 import React from "react";
 import { NoEthereumProviderError, UserRejectedRequestError } from "@web3-react/injected-connector";
+import { Web3Provider } from "@ethersproject/providers";
+import { useEnsName } from "../lib/useEnsName";
 
 export const Navbar = (): JSX.Element => {
     const { active, account, chainId, activate, deactivate, error } = useWeb3React()
@@ -28,17 +30,12 @@ export const Navbar = (): JSX.Element => {
       <BootstrapNavbar.Text>{getErrorMessage(error)}</BootstrapNavbar.Text>
     )
 
-    const signedInWithText = account && chainId && (
-      <BootstrapNavbar.Text>
-        Signed in with: <a href={getExplorerAddressLink(account, chainId)}>{shortenAddress(account)}</a> on {getChainName(chainId)}
-      </BootstrapNavbar.Text>
-    )
 
     return (
       <BootstrapNavbar fixed="top" variant="dark" bg="dark">
         <Container>
           <BootstrapNavbar.Brand>Explore Sets</BootstrapNavbar.Brand>
-          {signedInWithText}
+          <AccountName />
           {errorText}
             {active ? (
               <Button onClick={disconnect} variant="secondary">
@@ -52,6 +49,20 @@ export const Navbar = (): JSX.Element => {
           </Container>
       </BootstrapNavbar>
     )
+}
+
+export const AccountName = (): JSX.Element => {
+    const { account, chainId } = useWeb3React()
+    const { ensName } = useEnsName();
+
+    console.log(ensName)
+    const signedInWithText = account && chainId && (
+      <BootstrapNavbar.Text>
+        Signed in with: <a href={getExplorerAddressLink(account, chainId)}>{ensName ? ensName : shortenAddress(account)}</a> on {getChainName(chainId)}
+      </BootstrapNavbar.Text>
+    )
+
+    return (<div>{signedInWithText}</div>)
 }
 
 function getErrorMessage(error: Error) {
