@@ -8,6 +8,15 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 
 ## Local Development
 1. Clone this repo
+1. Create an Infura token
+    1. Navigate to [Infura](https://infura.io) and create an account
+    1. Click **Create new project** and provide a name (e.g. explore-sets)
+    1. Navigate to your new project and copy the project id (the part after `https://mainnet.infura.io/v3/`)
+1. Copy the default environment variable file to a `.env.local` file
+    ```bash
+    cp .env.default .env.local
+    ```
+1. Populate Infura token
 1. Start the app in dev mode with `yarn dev`
 1. Open [http://localhost:3000](http://localhost:3000)
 
