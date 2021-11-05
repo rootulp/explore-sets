@@ -12,7 +12,7 @@ export const TokenSymbol = (props: TokenSymbolProps): JSX.Element => {
 
     if (token) {
         return <div className={styles.tokenSymbol}>
-            <Image src={token.logoURI} width={20} height={20}/>
+            {token.logoURI && <Image src={token.logoURI} width={20} height={20}/>}
             <div className={styles.symbol}>{token.symbol}</div>
         </div>
     }

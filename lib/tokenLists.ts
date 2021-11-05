@@ -1,4 +1,5 @@
-export const TOKEN_LISTS_API = "https://wispy-bird-88a7.uniswap.workers.dev/?url=http://tokens.1inch.eth.link"
+export const SET_LIST = "https://raw.githubusercontent.com/SetProtocol/uniswap-tokenlist/main/set.tokenlist.json"
+export const ONE_INCH_LIST = "https://wispy-bird-88a7.uniswap.workers.dev/?url=http://tokens.1inch.eth.link"
 
 export interface TokenListsResponse {
     keywords: string[]
