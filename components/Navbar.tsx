@@ -4,10 +4,9 @@ import { injectedConnector } from "../lib/connector"
 import {Button, Container, Navbar as BootstrapNavbar} from "react-bootstrap";
 import React from "react";
 import { NoEthereumProviderError, UserRejectedRequestError } from "@web3-react/injected-connector";
-import { Web3Provider } from "@ethersproject/providers";
 
 export const Navbar = (): JSX.Element => {
-    const { active, account, chainId, activate, deactivate, error } = useWeb3React()
+    const { active, activate, deactivate, error } = useWeb3React()
 
     async function connect() {
         try {

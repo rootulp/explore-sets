@@ -4,7 +4,7 @@ import {SetList} from "../components/SetList"
 import React from "react";
 import { Navbar } from "../components/Navbar";
 import styles from "../styles/index.module.css"
-import { Token, TokenListsResponse, TOKEN_LISTS_API } from "../lib/tokenLists";
+import { ONE_INCH_TOKEN_LIST as ONE_INCH_LIST, SET_TOKEN_LIST as SET_LIST, Token, TokenListsResponse, TOKEN_LISTS_API } from "../lib/tokenLists";
 
 interface HomeProps {
   errorCode: any;
@@ -31,13 +31,12 @@ export const Home = (props: HomeProps): JSX.Element => {
 }
 
 export async function getStaticProps() {
-  const ret = await fetch(TOKEN_LISTS_API)
-  const result: TokenListsResponse = await ret.json()
-  const tokens = result.tokens
+  const setList = await (await fetch(SET_LIST)).json()
+  const oneInchList = await (await fetch(ONE_INCH_LIST)).json()
 
   return {
       props: {
-          tokens,
+          tokens: [...setList.tokens, ...oneInchList.tokens]
       }
   }
 }
