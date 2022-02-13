@@ -6,6 +6,10 @@ A small app to explore sets. Inspired by [tokensets.com/explore](https://www.tok
 
 Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtocol/set.js), [ethers](https://docs.ethers.io/v5/), [web3-react](https://github.com/NoahZinsmeister/web3-react), [useDapp](https://usedapp.readthedocs.io/en/latest/), and [tokenlists](https://tokenlists.org/).
 
+## Screenshot
+
+![](./screenshot.png)
+
 ## Local Development
 1. Clone this repo
 1. Create an Infura token
