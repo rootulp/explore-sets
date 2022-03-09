@@ -27,7 +27,3 @@ Built with [Next.js](https://nextjs.org/), [set.js](https://github.com/SetProtoc
 ## Contribute
 
 I'd appreciate any feedback via [issues](https://github.com/rootulp/explore-sets/issues/new).
-
-## License
-
-[MIT](https://rootulp.mit-license.org/) © [Rootul Patel](https://rootulp.com)
